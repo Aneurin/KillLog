@@ -10,9 +10,6 @@ Combat Parse: Used to scrape information from Combat Messages
 			<OnLoad>
 				CombatParse_OnLoad();
 			</OnLoad>
-			<OnEvent>
-				CombatParse_OnEvent(event);
-			</OnEvent>
 		</Scripts>
 	</Frame>
 </Ui>

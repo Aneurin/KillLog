@@ -4,6 +4,7 @@
 local CombatParse_Events = { };
 
 function CombatParse_OnLoad()
+  CombatParseFrame:SetScript("OnEvent",CombatParse_OnEvent)
   CombatParseFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 end
 
@@ -28,5 +29,5 @@ function CombatParse_RegisterEvent(info)
   table.insert(CombatParse_Events[info.event], { func = info.func, mapping = info.template });
 end
 
-function CombatParse_OnEvent(event)
+function CombatParse_OnEvent(this, event, timestamp, combat_event, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
 end
