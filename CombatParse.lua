@@ -31,16 +31,19 @@ end
 
 function CombatParse_OnEvent(this, event, timestamp, combat_event, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
  --if (event ~= "COMBAT_LOG_EVENT_UNFILTERED") then return
-  local listeners = CombatParse_Events[combat_event]
-  if not listeners then return -- nobody cares about this event
+  local listeners = CombatParse_Events[combat_event];
+  if not listeners then return end; -- nobody cares about this event
 
-  arg.srcName = srcName;
-  arg.dstName = dstName;
+  local arglist = {...} or {}
+
+  arglist.srcName = srcName;
+  arglist.dstName = dstName;
 
   local listener, t, src, dst;
+  t = {};
   for _, listener in pairs(listeners) do
     for src, dst in pairs(listener.mapping) do
-      t[dst] = arg[src]
+      t[dst] = arglist[src]
     end
     listener.func(t);
   end
