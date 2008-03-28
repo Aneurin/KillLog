@@ -769,7 +769,7 @@ local COMBATLOG_OBJECT_SELF = COMBATLOG_OBJECT_AFFILIATION_MINE +
 									end
 								end;
 	chatParseInfo.template = {dstName = "creepName"};
-	ChatParse_RegisterEvent(chatParseInfo);
+	CombatParse_RegisterEvent(chatParseInfo);
 	
 --#Endregion
 --#Region Death Messages
