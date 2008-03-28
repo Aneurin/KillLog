@@ -30,4 +30,18 @@ function CombatParse_RegisterEvent(info)
 end
 
 function CombatParse_OnEvent(this, event, timestamp, combat_event, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
+ --if (event ~= "COMBAT_LOG_EVENT_UNFILTERED") then return
+  local listeners = CombatParse_Events[combat_event]
+  if not listeners then return -- nobody cares about this event
+
+  arg.srcName = srcName;
+  arg.dstName = dstName;
+
+  local listener, t, src, dst;
+  for _, listener in pairs(listeners) do
+    for src, dst in pairs(listener.mapping) do
+      t[dst] = arg[src]
+    end
+    listener.func(t);
+  end
 end
