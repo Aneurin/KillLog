@@ -665,7 +665,7 @@ local COMBATLOG_OBJECT_SELF = COMBATLOG_OBJECT_AFFILIATION_MINE +
                               COMBATLOG_OBJECT_TYPE_PLAYER;
 
 --#Region Melee Combat Messages
-        local function logMeleeDamageDealt(t)
+        local function logDamageDealt(t)
           if t.srcFlags ~= COMBATLOG_OBJECT_SELF then return end;
           KillLogFrame_StoreTrivialCreepName(t.creepName);
           if t.crit then
@@ -675,31 +675,17 @@ local COMBATLOG_OBJECT_SELF = COMBATLOG_OBJECT_AFFILIATION_MINE +
           end
         end;
 	chatParseInfo.event    = "SWING_DAMAGE";
-	chatParseInfo.func     = logMeleeDamageDealt;
-	chatParseInfo.template   = { srcFlags = "srcFlags", dstName = "creepName", [1] = "damage" };
+	chatParseInfo.func     = logDamageDealt;
+	chatParseInfo.template   = { srcFlags = "srcFlags", dstName = "creepName", [1] = "damage", [6] = "crit" };
 	CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
 --#Region Spell Combat Messages
-	chatParseInfo.event    = "CHAT_MSG_SPELL_SELF_DAMAGE";
-	chatParseInfo.func     = function(t) KillLogFrame_StoreTrivialCreepName(t.creepName); KillLogFrame_CheckMaxDamage(t.spell, KILLLOG_LABEL_HIT, t.damage, KILLLOG_LABEL_DAMAGE); end;
-	chatParseInfo.template = SPELLLOGSELFOTHER; -- "Your %s hits %s for %d."
-	chatParseInfo.fields   = { "spell", "creepName", "damage" };
-	ChatParse_RegisterEvent(chatParseInfo);
-	
-	chatParseInfo.func     = function(t) KillLogFrame_StoreTrivialCreepName(t.creepName); KillLogFrame_CheckMaxDamage(t.spell, KILLLOG_LABEL_CRIT, t.damage, KILLLOG_LABEL_DAMAGE); end;
-	chatParseInfo.template = SPELLLOGCRITSELFOTHER; -- "Your %s crits %s for %d %s."
-	chatParseInfo.fields   = { "spell", "creepName", "damage" };
-	ChatParse_RegisterEvent(chatParseInfo);
-
-	chatParseInfo.func     = function(t) KillLogFrame_StoreTrivialCreepName(t.creepName); KillLogFrame_CheckMaxDamage(t.spell, KILLLOG_LABEL_HIT, t.damage, KILLLOG_LABEL_DAMAGE); end;
-	chatParseInfo.template = SPELLLOGSCHOOLSELFOTHER; --"Your %s hits %s for %d %s."
-	chatParseInfo.fields   = { "spell", "creepName", "damage", "spelltype" };
-	ChatParse_RegisterEvent(chatParseInfo);
-
-	chatParseInfo.func     = function(t) KillLogFrame_StoreTrivialCreepName(t.creepName); KillLogFrame_CheckMaxDamage(t.spell, KILLLOG_LABEL_CRIT, t.damage, KILLLOG_LABEL_DAMAGE); end;
-	chatParseInfo.template = SPELLLOGCRITSCHOOLSELFOTHER;
-	chatParseInfo.fields   = { "spell", "creepName", "damage", "spelltype" };
-	ChatParse_RegisterEvent(chatParseInfo);
+	chatParseInfo.event    = "SPELL_DAMAGE";
+	chatParseInfo.func     = logDamageDealt;
+        chatParseInfo.template   = { srcFlags = "srcFlags", dstName = "creepName", [2] = "spell", [4] = "damage", [9] = "crit" };
+	CombatParse_RegisterEvent(chatParseInfo);
+--#Endregion
+--#Region Ranged Combat Messages
 --#Endregion
 --#Region Healing Messages	
 	--[[ Healing Spells
