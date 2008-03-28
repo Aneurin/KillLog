@@ -25,7 +25,7 @@ function CombatParse_RegisterEvent(info)
           CombatParse_Events[info.event] = { };
   end
 
-  table.insert(ChatParse_Events[info.event], { func = info.func, mapping = info.template });
+  table.insert(CombatParse_Events[info.event], { func = info.func, mapping = info.template });
 end
 
 function CombatParse_OnEvent(event)
