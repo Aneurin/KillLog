@@ -5,7 +5,7 @@ author: "Daniel Risse" <dan@risse.com>
 created: Thu, 03 Feb 2004 00:38:00 -0600
 updated:
 
-Chat Parse: Used to scrap information from Chat Messages
+Chat Parse: Used to scrape information from Chat Messages
 
 
 

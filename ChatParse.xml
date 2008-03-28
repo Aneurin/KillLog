@@ -5,7 +5,7 @@ author: Daniel Risse <dan@risse.com>
 created: Thu, 03 Feb 2005 00:31:00 -0800
 updated: Thu, 03 Feb 2005 09:02:00 -0800
 
-Chat Parse: Used to scrap information from Chat Messages
+Chat Parse: Used to scrape information from Chat Messages
 -->
 
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
