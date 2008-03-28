@@ -1,4 +1,4 @@
-﻿----
+----
 Name
 ----
 
@@ -241,7 +241,7 @@ History
   * corrected data loading errors for non English localizations
   * sort by name now displays class (elite) instead of kill count and header
     displays number of unique creeps fought
-  * I might have rested xp there now for diffe ent localizations.
+  * I might have rested xp there now for different localizations.
   * Added some debugging information about matching crits...  I hope this
     will allow me to get that functioning correctly.
   * cleaned up code for counting trivial kills and what creep killed you
@@ -348,7 +348,7 @@ Thanks to
 Finkle and Xila for helping to beta test new version and for providing
 valuable feadback about how to create a friendly user interface.
 
-Dead_Masters and Myth for help with the German transl tion.  Myth got me
+Dead_Masters and Myth for help with the German translation.  Myth got me
 started with a few words, but Dead_Masters did the rest.  All of the help is
 greatly appreciated though!  Now Lunox has provided a few more localization
 updates!  The most recent translations were actually provided by Lunox.
