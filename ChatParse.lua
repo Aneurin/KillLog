@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 path: /ChatParse/
 filename: ChatParse.lua
 author: "Daniel Risse" <dan@risse.com>
@@ -63,14 +63,6 @@ function ChatParse_OnEvent(event)
 		processed = { };
 		for index, info in pairs(ChatParse_Events[event]) do
 			if ( not info.AddOn or not processed[info.AddOn] ) then
-				--[[
-				if ( info.input ) then
-					string = info.input()
-				else
-					string = arg1;
-				end
-				match = ChatParse_MatchPattern(string, info.patternSpec);
-				]]
 				match = ChatParse_MatchPattern(arg1, info.patternSpec);
 				if ( match ) then
 					result = info.func(match);
@@ -110,7 +102,7 @@ function ChatParse_RegisterEvent(info)
 
 	local spec = ChatParse_FormatToPattern(info.template, info.fields, info.english);
 	if ( spec ) then
-		table.insert(ChatParse_Events[info.event], { func = info.func, patternSpec = spec, AddOn = info.AddOn, input = info.input });
+		table.insert(ChatParse_Events[info.event], { func = info.func, patternSpec = spec, AddOn = info.AddOn });
 	end
 end
 
