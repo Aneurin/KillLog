@@ -38,10 +38,12 @@ function CombatParse_OnEvent(this, event, timestamp, combat_event, srcGUID, srcN
 
   arglist.srcName = srcName;
   arglist.dstName = dstName;
+  arglist.srcFlags = srcFlags;
+  arglist.dstFlags = dstFlags;
 
   local listener, t, src, dst;
-  t = {};
   for _, listener in pairs(listeners) do
+    t = {};
     for src, dst in pairs(listener.mapping) do
       t[dst] = arglist[src]
     end
