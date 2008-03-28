@@ -1,9 +1,9 @@
-## Interface: 20003
-## Title: Kill Log [|CFF87ADE42.6.2a|r]
-## Author: Detritis
-## Version: 2.6.2a
+## Interface: 20400
+## Title: Kill Log [|CFF87ADE42.6.9|r]
+## Author: Frenn, Detritis, Waywocket
+## Version: 2.6.9
 ## Notes: This AddOn keeps a record of your exploits fighting creeps in Azeroth.
-## X-Date: December 28, 2006
+## X-Date: March 28, 2008
 ## X-Version: KILLLOG_VERSION
 ## X-Category: MYADDONS_CATEGORY_COMBAT
 ## X-Help: KillLog_Help
@@ -12,6 +12,7 @@
 ## LoadOnDemand: 0
 ## SavedVariables: KillLog_Options,KillLog_CreepFamily,KillLog_CreepInfo,KillLog_CharacterData
 ChatParse.xml
+CombatParse.xml
 KillLogFrame.xml
 KillLog_GeneralFrame.xml
 KillLog_ListFrame.xml
