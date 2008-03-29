@@ -669,7 +669,10 @@ function KillLogFrame_LoadData()
 
         local function logDamageDealt(t)
           local attackName, crit
-          if t.srcFlags == COMBATLOG_OBJECT_SELF then
+          if t.dstFlags == COMBATLOG_OBJECT_SELF then
+            KillLogFrame.lastHitOtherToSelf = t.srcName;
+            return;
+          elseif t.srcFlags == COMBATLOG_OBJECT_SELF then
             attackName = t.spell or KILLLOG_LABEL_DEFAULT;
           elseif t.srcFlags == COMBATLOG_OBJECT_PET then
             attackName = t.spell or KILLLOG_LABEL_DEFAULT;
@@ -688,12 +691,16 @@ function KillLogFrame_LoadData()
 
 --#Region Melee Combat Messages
 	chatParseInfo.event    = "SWING_DAMAGE";
-	chatParseInfo.template   = { srcFlags = "srcFlags", dstName = "creepName", [1] = "damage", [6] = "crit" };
+	chatParseInfo.template   = { srcName = "srcName", srcFlags = "srcFlags",
+                                    dstName = "creepName", dstFlags = "dstFlags",
+                                    [1] = "damage", [6] = "crit" };
 	CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
 --#Region Spell Combat Messages
 	chatParseInfo.event    = "SPELL_DAMAGE";
-        chatParseInfo.template   = { srcFlags = "srcFlags", dstName = "creepName", [2] = "spell", [4] = "damage", [9] = "crit" };
+        chatParseInfo.template   = { srcName = "srcName", srcFlags = "srcFlags",
+                                    dstName = "creepName", dstFlags = "dstFlags",
+                                    [2] = "spell", [4] = "damage", [9] = "crit" };
 	CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
 --#Region Ranged Combat Messages
@@ -725,30 +732,6 @@ function KillLogFrame_LoadData()
 	chatParseInfo.fields   = { "spell", "creepName", "damage" };
 	ChatParse_RegisterEvent(chatParseInfo);]]
 --#Endregion
---#Region Creature Melee Combat Messages
-	chatParseInfo.event    = "CHAT_MSG_COMBAT_CREATURE_VS_SELF_HITS";
-	chatParseInfo.func     = function(t) KillLogFrame.lastHitOtherToSelf = t.creepName; end;
-	chatParseInfo.template = COMBATHITOTHERSELF; --"%s hits you for %d."
-	chatParseInfo.fields   = { "creepName", "damage" };
-	ChatParse_RegisterEvent(chatParseInfo);
-
-	chatParseInfo.func     = function(t) KillLogFrame.lastHitOtherToSelf = t.creepName; end;
-	chatParseInfo.template = COMBATHITCRITOTHERSELF; --"%s crits you for %d."
-	chatParseInfo.fields   = { "creepName", "damage" };
-	ChatParse_RegisterEvent(chatParseInfo);
---#Endregion
---#Region Creature Spell Combat Messages
-	chatParseInfo.event    	= "CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE";
-	chatParseInfo.func     	= 	function(t) KillLogFrame.lastHitOtherToSelf = t.creepName; 	end;
-	chatParseInfo.template 	= SPELLLOGSCHOOLOTHERSELF; --"%s's %s hits you for %d %s damage."
-	chatParseInfo.fields   	= { "creepName", "spell", "damage", "spelltype"};
-	ChatParse_RegisterEvent(chatParseInfo);
-
-	chatParseInfo.func     	= 	function(t) KillLogFrame.lastHitOtherToSelf = t.creepName; end;
-	chatParseInfo.template 	= SPELLLOGCRITSCHOOLOTHERSELF; --"%s's %s crits you for %d %s damage."
-	chatParseInfo.fields   	= { "creepName", "spell", "damage", "spelltype"};
-	ChatParse_RegisterEvent(chatParseInfo);
---#Endregion
 --#Region Creature Kill Messages
 	chatParseInfo.event    	= "PARTY_KILL";
 	chatParseInfo.func     	= 	function(t) KillLogFrame_RecordData({creepName = t.creepName}, "kill",1); end;
@@ -758,7 +741,7 @@ function KillLogFrame_LoadData()
 --#Endregion
 --#Region Death Messages
 	-- You Die
-	chatParseInfo.event    	= "CHAT_MSG_COMBAT_FRIENDLY_DEATH";
+	chatParseInfo.event    	= "CHAT_MSG_COMBAT_MISC_INFO";
 	chatParseInfo.func		=	function()
 									local killedBy = KILLLOG_LIST_UNKNOWNTYPE;
 									if ( KillLogFrame.lastHitOtherToSelf ) then
@@ -769,7 +752,7 @@ function KillLogFrame_LoadData()
 									end
 									
 								end;
-	chatParseInfo.template = UNITDIESSELF; -- "You die."
+	chatParseInfo.template = DURABILITYDAMAGE_DEATH; -- "Your equipped items suffer a 10%% durability loss."
 	chatParseInfo.fields   = { };
 	ChatParse_RegisterEvent(chatParseInfo);
 --#Endregion
