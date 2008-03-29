@@ -172,7 +172,6 @@ end
 function KillLogLoadingFrame_OnUpdate()
 	if ( KillLogLoadingFrame.combatEnded ) then
 		if ( KillLogLoadingFrame.combatEnded < GetTime() ) then
-			KillLogFrame.lastHitSelfToOther = nil;
 			KillLogFrame.lastHitOtherToSelf = nil;
 			KillLogLoadingFrame.combatEnded = nil;
 		end
@@ -277,7 +276,6 @@ function KillLogFrame_OnLoad()
 	this.init   = 0;
 	-- this will only be filled with creeps that we do not expect experience for
 	-- that way, when we see a creep die we can count it as a kill if it's name is filled
-	this.lastHitSelfToOther = nil;
 	this.lastHitOtherToSelf = nil;
 end
 
@@ -618,7 +616,7 @@ function KillLogFrame_LoadData()
 	local chatParseInfo 	= { AddOn = "KillLog" };
 --#Region XP Gain
 	chatParseInfo.event		= "CHAT_MSG_COMBAT_XP_GAIN";
-	chatParseInfo.func		= function(t) KillLogFrame_RecordData(t, "kill", 1); end;
+	chatParseInfo.func		= function(t) KillLogFrame_RecordData(t, "kill"); end;
 
 	chatParseInfo.template = COMBATLOG_XPGAIN_EXHAUSTION1_GROUP; --"%s dies, you gain %d experience. (%s exp %s bonus, +%d group bonus)"
 	chatParseInfo.fields   = { "creepName", "xp", "bonusXp", "bonusType", "groupXp" };
@@ -679,7 +677,6 @@ function KillLogFrame_LoadData()
           else
             return;
           end;
-          KillLogFrame_StoreTrivialCreepName(t.creepName);
           if t.crit then
             crit = KILLLOG_LABEL_CRIT
           else
@@ -754,12 +751,7 @@ function KillLogFrame_LoadData()
 --#Endregion
 --#Region Creature Kill Messages
 	chatParseInfo.event    	= "PARTY_KILL";
-	chatParseInfo.func     	= 	function(t)
-									if ( KillLogFrame.lastHitSelfToOther and KillLogFrame.lastHitSelfToOther == t.creepName ) then
-										KillLogFrame_RecordData({ creepName = KillLogFrame.lastHitSelfToOther }, "kill", 1);
-										KillLogFrame.lastHitSelfToOther = nil;
-									end
-								end;
+	chatParseInfo.func     	= 	function(t) KillLogFrame_RecordData({creepName = t.creepName}, "kill",1); end;
 	chatParseInfo.template = {dstName = "creepName"};
 	CombatParse_RegisterEvent(chatParseInfo);
 	
@@ -985,46 +977,6 @@ function KillLogFrame_RecordCreepInfo(unit)
 				KillLog_CreepPortraitID = KillLog_CreepPortraitID + 1;
 			end
 		end
-	end
-
-	if ( unit == "target" and not UnitIsDead(unit) and (not UnitIsTapped(unit) or UnitIsTappedByPlayer(unit) ) and UnitCanAttack("player", unit) ) then
-			KillLogFrame_StoreTrivialCreepName(creepName, creepLevel);
-			if ( creepLevel ) then
-				DebugMessage("KL", "Gathering details for <"..creepName.."> level <"..creepLevel..">", "info");
-			else	
-				DebugMessage("KL", "Gathering details for <"..creepName..">", "info");
-			end
-	end
-end
-
---[[
---	check if we should have received exp or not
---  the highest level creep we've seen would need to return a grey color
---  and we need to have just struck this creep
---  we do not want to either receive credit twice for this kill or receive credit for someone else's kill
---]]
-function KillLogFrame_CheckTrivialCreepName(creepName, creepLevel)
-	if ( KillLogFrame.NoXpGain or not creepName or (creepLevel and KillLog_GetDifficultyRating(creepLevel) == 1) ) then
-		DebugMessage("KL", "NoXPGain", "helper");
-		return true;
-	end
-	if ( KillLog_CreepInfo[creepName] ) then
-		if ( (KillLog_CreepInfo[creepName]["type"] and KillLog_CreepInfo[creepName]["type"] == "Critter") or KillLogFrame.NoXpGain ) then
-			DebugMessage("KL", "Critter or Boss", "helper");
-			return true;
-		elseif ( not creepLevel and KillLog_CreepInfo[creepName]["max"] and KillLog_GetDifficultyRating(KillLog_CreepInfo[creepName]["max"]) == 1 ) then
-			DebugMessage("KL", "No Level", "helper");
-			return true;
-		end
-	end
-	DebugMessage("KL", "CheckTrivialCreepName - returning nil", "helper");
-	return nil;
-end
-
-function KillLogFrame_StoreTrivialCreepName(creepName, creepLevel)
-	if ( KillLogFrame_CheckTrivialCreepName(creepName, creepLevel) ) then
-		KillLogFrame.lastHitSelfToOther = creepName;
-		DebugMessage("KL", "Details gathered for <"..KillLogFrame.lastHitSelfToOther..">", "info");
 	end
 end
 
