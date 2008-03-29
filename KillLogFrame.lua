@@ -674,18 +674,20 @@ local COMBATLOG_OBJECT_SELF = COMBATLOG_OBJECT_AFFILIATION_MINE +
             KillLogFrame_CheckMaxDamage(t.spell or KILLLOG_LABEL_DEFAULT, KILLLOG_LABEL_HIT, t.damage, KILLLOG_LABEL_DAMAGE);
           end
         end;
+        chatParseInfo.func     = logDamageDealt;
+
 	chatParseInfo.event    = "SWING_DAMAGE";
-	chatParseInfo.func     = logDamageDealt;
 	chatParseInfo.template   = { srcFlags = "srcFlags", dstName = "creepName", [1] = "damage", [6] = "crit" };
 	CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
 --#Region Spell Combat Messages
 	chatParseInfo.event    = "SPELL_DAMAGE";
-	chatParseInfo.func     = logDamageDealt;
         chatParseInfo.template   = { srcFlags = "srcFlags", dstName = "creepName", [2] = "spell", [4] = "damage", [9] = "crit" };
 	CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
 --#Region Ranged Combat Messages
+        chatParseInfo.event    = "RANGE_DAMAGE";
+        CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
 --#Region Healing Messages	
 	--[[ Healing Spells
