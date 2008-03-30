@@ -12,7 +12,23 @@ New
 -------
 Updates
 -------
++ Version 2.6.9
+  * Changes:-
+    Updated to record combat information provided by the new combat log system
+    introduced in patch 2.4.0.
+    The method for tracking kills has changed, and is described in the
+    'Description' section below.
+  * Known Issues:-
+    Player deaths are not recorded, due to a bug in the game: the 'UNIT_DIED'
+    combat event does not fire upon the death of the player. As a workaround, I
+    tried registering for notification of the 10% durability loss on equipped
+    items instead, but couldn't get it to work.
+    The fix for this issue is scheduled to be included in WoW 2.4.2.
 
+    The combat parsing system is more simplistic than the ChatParse system - for
+    example it is not possible to unregister for an event, and the registrant
+    must know the order of arguments provided by the registered event.
+    This system is currently not documented.
 + Version 2.6.2a
   * Bug Fixes:-
     Fixes bug with debugging messages with fresh installs only (this version is not needed if you are updating from an earlier version)
@@ -161,6 +177,23 @@ Description
 Record number of creeps you kill and the amount of experience you receive.
 Also records deaths.
 
+As of WoW 2.4.0 it is possible to be informed of all player or party kills via
+the PARTY_KILL event, hence the checks on whether a kill should be credited or
+not are no longer needed. All PARTY_KILLs are now counted, and kill counts are
+no longer incremented when recording XP gain, to avoid double counting.
+
+This changes the behaviour of the addon slightly: creatures which do not yield
+XP are now always tracked when the player or a party kills them, not just when
+the creature killed was the one last hit by the player.
+
+More simply: if the game considers you eligible for kill credit, it's counted.
+
+NB: This has not been tested when a party member kills something too far away
+for the player to receive XP, but close enough to be recorded in the combat
+log. If this situation can occur, then it will still be counted as a kill.
+
+The following information is historical:
+
 
 The method of determining if you killed a creep or not is a bit fuzzy.  This
 is the general style I used.  When a creep dies, 
@@ -183,7 +216,6 @@ the maximum level should give you experience.
 This is still not perfect, since Blizzard does not provide any method to
 track kills that you do not receive experience for.  But it is a little
 better.
-
 
 -----------------
 Accessing the GUI
