@@ -741,20 +741,22 @@ function KillLogFrame_LoadData()
 --#Endregion
 --#Region Death Messages
 	-- You Die
-	chatParseInfo.event    	= "CHAT_MSG_COMBAT_MISC_INFO";
-	chatParseInfo.func		=	function()
-									local killedBy = KILLLOG_LIST_UNKNOWNTYPE;
-									if ( KillLogFrame.lastHitOtherToSelf ) then
-										KillLogFrame_RecordData({ creepName = KillLogFrame.lastHitOtherToSelf }, "death", 1);
-										killedBy = KillLogFrame.lastHitOtherToSelf;
-										KillLogFrame_RecordDeath(killedBy);
-										KillLogFrame.lastHitOtherToSelf = nil;
-									end
-									
-								end;
-	chatParseInfo.template = DURABILITYDAMAGE_DEATH; -- "Your equipped items suffer a 10%% durability loss."
-	chatParseInfo.fields   = { };
-	ChatParse_RegisterEvent(chatParseInfo);
+	chatParseInfo.event    	= "UNIT_DIED";
+	chatParseInfo.func      = function(t)
+					if ( t.creepName ~= characterName ) then
+						return;
+					else
+				  		local killedBy = KILLLOG_LIST_UNKNOWNTYPE;
+				  		if ( KillLogFrame.lastHitOtherToSelf ) then
+							KillLogFrame_RecordData({ creepName = KillLogFrame.lastHitOtherToSelf }, "death", 1);
+							killedBy = KillLogFrame.lastHitOtherToSelf;
+							KillLogFrame_RecordDeath(killedBy);
+							KillLogFrame.lastHitOtherToSelf = nil;
+				  		end
+				  	end;
+				  end;
+	chatParseInfo.template = {dstName = "creepName"};
+	CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
 	-- error handling
 	KillLogFrame:RegisterEvent("MEMORY_EXHAUSTED");
