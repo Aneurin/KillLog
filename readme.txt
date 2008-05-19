@@ -12,6 +12,17 @@ New
 -------
 Updates
 -------
++ Version 2.7.0
+  * Changes:-
+    Reinstated death tracking, now that WoW 2.4.2 has been released,
+    making it once again possible to detect when the player dies.
+  * Known Issues:-
+    This should have the same behaviour as the feature prior to WoW 2.4.0.
+    This means it infers the killer based on who hit the player last,
+    according to the combat log. Consequently it may (in theory) suffer
+    from races, if combat messages do not arrive in the correct order, and
+    it can't track environmental deaths (falling, drowning, lava, ...).)
+
 + Version 2.6.9
   * Changes:-
     Updated to record combat information provided by the new combat log system
