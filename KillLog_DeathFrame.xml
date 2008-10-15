@@ -162,7 +162,7 @@ death frame: Listing of your deaths
 				</Anchors>
 				<Scripts>
 					<OnVerticalScroll>
-						FauxScrollFrame_OnVerticalScroll(KILLLOG_DEATH_TITLEBUTTON_HEIGHT, KillLog_DeathFrame_Update)
+						FauxScrollFrame_OnVerticalScroll(self, offset, KILLLOG_DEATH_TITLEBUTTON_HEIGHT, KillLog_DeathFrame_Update)
 					</OnVerticalScroll>
 				</Scripts>
 			</ScrollFrame>

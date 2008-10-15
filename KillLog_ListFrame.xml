@@ -501,7 +501,7 @@ list frame: a listing of the creeps you have fought
 				</Anchors>
 				<Scripts>
 					<OnVerticalScroll>
-						FauxScrollFrame_OnVerticalScroll(KILLLOG_LIST_TITLEBUTTON_HEIGHT, KillLog_ListFrame_Update)
+						FauxScrollFrame_OnVerticalScroll(self, offset, KILLLOG_LIST_TITLEBUTTON_HEIGHT, KillLog_ListFrame_Update)
 					</OnVerticalScroll>
 				</Scripts>
 			</ScrollFrame>
