@@ -748,7 +748,6 @@ end
 ---------------------
 
 -- sort drop down
--- FIXME: Unused
 function KillLog_ListFrame_SortDropDown_OnLoad(self)
 	UIDropDownMenu_Initialize(this, KillLog_ListFrame_SortDropDown_Initialize);
 	UIDropDownMenu_SetWidth(self, 90);

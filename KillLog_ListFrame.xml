@@ -324,7 +324,6 @@ list frame: a listing of the creeps you have fought
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						--KillLog_ListFrame_LevelDropDown_OnLoad(self);
 						UIDropDownMenu_SetWidth(self, 54);
 					</OnLoad>
 					<OnShow>
@@ -342,7 +341,7 @@ list frame: a listing of the creeps you have fought
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						KillLog_ListFrame_SortDropDown_OnLoad();
+						KillLog_ListFrame_SortDropDown_OnLoad(self);
 					</OnLoad>
 					<OnShow>
 						KillLog_ListFrame_SortDropDown_OnShow();
