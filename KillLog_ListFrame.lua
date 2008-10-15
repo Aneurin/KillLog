@@ -748,9 +748,10 @@ end
 ---------------------
 
 -- sort drop down
-function KillLog_ListFrame_SortDropDown_OnLoad()
+-- FIXME: Unused
+function KillLog_ListFrame_SortDropDown_OnLoad(self)
 	UIDropDownMenu_Initialize(this, KillLog_ListFrame_SortDropDown_Initialize);
-	UIDropDownMenu_SetWidth(90);
+	UIDropDownMenu_SetWidth(self, 90);
 	UIDropDownMenu_SetSelectedID(KillLog_ListFrame_SortDropDown, 1);
 	KillLog_ListFrame.getSortInfo = KILLLOG_LIST_SORT[1].infoFunc;
 end
