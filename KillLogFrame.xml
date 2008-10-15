@@ -19,7 +19,7 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 				this:SetFrameLevel(this:GetFrameLevel() + 4);
 			</OnLoad>
 			<OnClick>
-				PanelTemplates_Tab_OnClick(KillLogFrame);
+				PanelTemplates_Tab_OnClick(self, KillLogFrame);
 				KillLogTab_OnClick();
 			</OnClick>
 			<OnShow>
