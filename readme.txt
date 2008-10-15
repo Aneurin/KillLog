@@ -12,6 +12,17 @@ New
 -------
 Updates
 -------
++ Version 2.99.0
+  * Changes:-
+    Update for WoW 3.0.2.
+    Colouring of creep names in the log is disabled until I have the time to
+    research how this should be done now.
+    This has been briefly tested and all other incompatibilities should be
+    fixed, but for the moment should be considered beta. When the colouring is
+    fixed and I've used it a little more, I'll release it as version 3.0 (or
+    perhaps even 3.0.2) and try to track the WoW version so as to indicate the
+    version compatibility.
+
 + Version 2.7.0
   * Changes:-
     Reinstated death tracking, now that WoW 2.4.2 has been released,
