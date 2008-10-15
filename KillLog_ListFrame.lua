@@ -188,9 +188,9 @@ function KillLog_ListFrame_Update()
 				creepCreep:SetWidth(310);
 			end
 
-			creepTitleTag:SetTextColor(color.r, color.g, color.b);
-			creepTitle:SetTextColor(color.r, color.g, color.b);
-			creepCreep:SetTextColor(color.r, color.g, color.b);
+--FIXME:			creepTitleTag:SetTextColor(color.r, color.g, color.b);
+--FIXME:			creepTitle:SetTextColor(color.r, color.g, color.b);
+--FIXME:			creepCreep:SetTextColor(color.r, color.g, color.b);
 			creepTitle.r = color.r;
 			creepTitle.g = color.g;
 			creepTitle.b = color.b;
@@ -201,7 +201,7 @@ function KillLog_ListFrame_Update()
 				KillLog_List_CreepHighlight:SetVertexColor(creepTitle.r, creepTitle.g, creepTitle.b);
 				KillLog_List_HighlightFrame:SetPoint("TOPLEFT", "KillLog_List_Title"..index, "TOPLEFT", 0, 0);
 				KillLog_List_HighlightFrame:Show();
-				creepTitleTag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+--FIXME:				creepTitleTag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 				creepTitle:LockHighlight();
 			else
 				creepTitle:UnlockHighlight();
@@ -268,7 +268,7 @@ function KillLog_ListFrame_SetSelection(creepID)
 		if ( creepID > scrollFrameOffset and creepID <= (scrollFrameOffset + KILLLOG_LIST_CREEPS_DISPLAYED) and creepID <= KillLog_ListFrame_GetNumCreepEntries() ) then
 			local titleButton = getglobal("KillLog_List_Title"..id);
 			titleButton:LockHighlight();
-			getglobal("KillLog_List_Title"..id.."Tag"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+--FIXME:			getglobal("KillLog_List_Title"..id.."Tag"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 			KillLog_List_CreepHighlight:SetVertexColor(titleButton.r, titleButton.g, titleButton.b);
 			KillLog_List_HighlightFrame:SetPoint("TOPLEFT", "KillLog_List_Title"..id, "TOPLEFT", 5, 0);
 			KillLog_List_HighlightFrame:Show();
