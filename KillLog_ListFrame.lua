@@ -768,7 +768,7 @@ function KillLog_ListFrame_SortDropDown_Initialize()
 		info.text = data.name;
 		if ( index == KillLog_ListFrame_SortDropDown.selectedID ) then
 			info.checked = true;
-			UIDropDownMenu_SetText(data.name, KillLog_ListFrame_SortDropDown);
+			UIDropDownMenu_SetText(KillLog_ListFrame_SortDropDown, data.name);
 		else
 			info.checked = nil;
 		end
@@ -828,7 +828,7 @@ function KillLog_ListFrame_LevelDropDown_Initialize()
         info.text = data;
 		if ( index == KillLog_ListFrame_LevelDropDown.selectedID ) then
 			info.checked = true;
-			UIDropDownMenu_SetText(data, KillLog_ListFrame_LevelDropDown);
+			UIDropDownMenu_SetText(KillLog_ListFrame_LevelDropDown, data);
 		else
 			info.checked = nil;
 		end
