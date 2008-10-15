@@ -102,9 +102,9 @@ function KillLog_OptionsFrame_Load()
 		end
 
 		if ( slider.disabled ) then
-			OptionsFrame_DisableSlider(slider);
+			slider:Disable();
 		else
-			OptionsFrame_EnableSlider(slider);
+			slider:Enable();
 		end
 
 		slider:SetMinMaxValues(value.minValue, value.maxValue);
@@ -198,17 +198,17 @@ end
 
 function KillLog_OptionsFrame_UpdateStoreLevel(checked)
 	if ( checked ) then
-		OptionsFrame_EnableSlider(KillLog_OptionsFrameSlider1);
+		KillLog_OptionsFrameSlider1:Enable();
 	else
-		OptionsFrame_DisableSlider(KillLog_OptionsFrameSlider1);
+		KillLog_OptionsFrameSlider1:Disable();
 	end
 end
 
 function KillLog_OptionsFrame_UpdatePortraits(checked)
 	if ( checked ) then
-		OptionsFrame_EnableSlider(KillLog_OptionsFrameSlider2);
+		KillLog_OptionsFrameSlider2:Enable();
 	else
-		OptionsFrame_DisableSlider(KillLog_OptionsFrameSlider2);
+		KillLog_OptionsFrameSlider2:Disable();
 	end
 end
 
@@ -222,9 +222,9 @@ end
 
 function KillLog_OptionsFrame_UpdateDebugging(checked)
 	if ( checked ) then
-		OptionsFrame_EnableSlider(KillLog_OptionsFrameSlider3);
+		KillLog_OptionsFrameSlider3:Enable();
 	else
-		OptionsFrame_DisableSlider(KillLog_OptionsFrameSlider3);
+		KillLog_OptionsFrameSlider3:Disable();
 	end
 end
 
