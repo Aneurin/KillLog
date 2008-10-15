@@ -23,7 +23,7 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 				KillLogTab_OnClick();
 			</OnClick>
 			<OnShow>
-				PanelTemplates_TabResize(10);
+				PanelTemplates_TabResize(self, 10);
 				getglobal(this:GetName().."HighlightTexture"):SetWidth(this:GetTextWidth() + 30);
 			</OnShow>
 		</Scripts>

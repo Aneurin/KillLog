@@ -303,7 +303,7 @@ list frame: a listing of the creeps you have fought
 						<Scripts>
 							<OnLoad>
 								PanelTemplates_SelectTab(this);
-								PanelTemplates_TabResize(0);
+								PanelTemplates_TabResize(this, 0);
 								getglobal(this:GetName().."HighlightTexture"):SetWidth(this:GetTextWidth() + 31);
 							</OnLoad>
 							<OnClick>
