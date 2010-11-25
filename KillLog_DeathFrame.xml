@@ -35,10 +35,10 @@ death frame: Listing of your deaths
 		</Layers>
 		<Scripts>
 			<OnLoad>
-				this:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
             <OnClick>
-				KillLog_DeathFrame_OnClick(arg1);
+				KillLog_DeathFrame_OnClick(self, ...);
 			</OnClick>
 		</Scripts>
 	</Button>
@@ -145,7 +145,7 @@ death frame: Listing of your deaths
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						KillLog_Death_TitleDropDown_OnLoad();
+						KillLog_Death_TitleDropDown_OnLoad(self);
 					</OnLoad>
 				</Scripts>
 			</Frame>

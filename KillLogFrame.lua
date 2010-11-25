@@ -245,20 +245,20 @@ function KillLogFrame_ShowSubFrame(frameName)
 	end
 end
 
-function KillLogTab_OnClick()
-	if ( this:GetName() == "KillLogFrameTab1" ) then
+function KillLogTab_OnClick(self)
+	if ( self:GetName() == "KillLogFrameTab1" ) then
 		ToggleKillLog("KillLog_GeneralFrame");
-	elseif ( this:GetName() == "KillLogFrameTab2" ) then
+	elseif ( self:GetName() == "KillLogFrameTab2" ) then
 		ToggleKillLog("KillLog_ListFrame");
-	elseif ( this:GetName() == "KillLogFrameTab3" ) then
+	elseif ( self:GetName() == "KillLogFrameTab3" ) then
 		ToggleKillLog("KillLog_DeathFrame");
-	elseif ( this:GetName() == "KillLogFrameTab4" ) then
+	elseif ( self:GetName() == "KillLogFrameTab4" ) then
 		ToggleKillLog("KillLog_OptionsFrame");
 	end
 	PlaySound("igCharacterInfoTab");
 end
 
-function KillLogFrame_OnLoad()
+function KillLogFrame_OnLoad(self)
 	SlashCmdList["KILL_LOG_TOGGLE"] = KillLogFrame_Slash;
 	SLASH_KILL_LOG_TOGGLE1 = "/killlog";
 	SLASH_KILL_LOG_TOGGLE2 = "/kl";
@@ -268,15 +268,15 @@ function KillLogFrame_OnLoad()
 	end
 
 	-- Tab Handling code
-	PanelTemplates_SetNumTabs(this, 4);
-	PanelTemplates_SetTab(this, 2);
-	-- PanelTemplates_DisableTab(this, 4);
+	PanelTemplates_SetNumTabs(self, 4);
+	PanelTemplates_SetTab(self, 2);
+	-- PanelTemplates_DisableTab(self, 4);
 	
-	this.loaded = nil;
-	this.init   = 0;
+	self.loaded = nil;
+	self.init   = 0;
 	-- this will only be filled with creeps that we do not expect experience for
 	-- that way, when we see a creep die we can count it as a kill if it's name is filled
-	this.lastHitOtherToSelf = nil;
+	self.lastHitOtherToSelf = nil;
 end
 
 function KillLogFrame_Slash(msg)

@@ -16,8 +16,8 @@ function KillLog_DeathFrame_OnShow()
 	KillLog_DeathFrame_Update()
 end
 
-function KillLog_Death_TitleDropDown_OnLoad()
-	UIDropDownMenu_Initialize(this, KillLog_Death_TitleDropDown_Initialize, "MENU");
+function KillLog_Death_TitleDropDown_OnLoad(self)
+	UIDropDownMenu_Initialize(self, KillLog_Death_TitleDropDown_Initialize, "MENU");
 end
 
 function KillLog_Death_TitleDropDown_Initialize()
@@ -27,11 +27,11 @@ function KillLog_Death_TitleDropDown_Initialize()
 	UIDropDownMenu_AddButton(info);
 end
 
-function KillLog_DeathFrame_OnClick(button)
+function KillLog_DeathFrame_OnClick(self, button)
 	--[[if ( not KillLog_AllCharacterData or not KillLog_AllCharacterData["death"] or table.getn(KillLog_AllCharacterData["death"]) == 0 ) then
 	else
 		if ( button == "LeftButton" ) then 
-			local deathID = this:GetID() + FauxScrollFrame_GetOffset(KillLog_DeathScrollFrame);
+			local deathID = self:GetID() + FauxScrollFrame_GetOffset(KillLog_DeathScrollFrame);
 		
 			if( deathID > 0 ) then
 	            local realm = GetCVar("realmName");
@@ -49,8 +49,8 @@ function KillLog_DeathFrame_OnClick(button)
     			KillLog_DeathFrame_HighlightFrame:Show();
 			end
 		elseif ( button == "RightButton" ) then 
-			ToggleDropDownMenu(1, nil, KillLog_Death_TitleDropDown, "KillLog_List_Title"..this:GetID(), 10, 0);
-			DebugMessage("[KL - Death]", "Death ID: "..this:GetID() + FauxScrollFrame_GetOffset(KillLog_DeathScrollFrame), "error");
+			ToggleDropDownMenu(1, nil, KillLog_Death_TitleDropDown, "KillLog_List_Title"..self:GetID(), 10, 0);
+			DebugMessage("[KL - Death]", "Death ID: "..self:GetID() + FauxScrollFrame_GetOffset(KillLog_DeathScrollFrame), "error");
 		end
 	end]]
 end

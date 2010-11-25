@@ -52,19 +52,19 @@ list frame: a listing of the creeps you have fought
 		</Layers>
 		<Scripts>
 			<OnLoad>
-				getglobal(this:GetName().."Text"):SetText("SCT Color");
+				getglobal(self:GetName().."Text"):SetText("SCT Color");
 			</OnLoad>
 			<OnClick>
 				KillLog_OpenColorPicker();
 			</OnClick>
 			<OnEnter>
-				getglobal(this:GetName().."SwatchBg"):SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
+				getglobal(self:GetName().."SwatchBg"):SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
 			</OnEnter>
 			<OnLeave>
 				if (KillLog_Options.color) then
-					getglobal(this:GetName().."SwatchBg"):SetVertexColor(KillLog_Options.color.r, KillLog_Options.color.g, KillLog_Options.color.b);
+					getglobal(self:GetName().."SwatchBg"):SetVertexColor(KillLog_Options.color.r, KillLog_Options.color.g, KillLog_Options.color.b);
 				else
-					getglobal(this:GetName().."SwatchBg"):SetVertexColor( 0.0, 0.0, 0.0 );
+					getglobal(self:GetName().."SwatchBg"):SetVertexColor( 0.0, 0.0, 0.0 );
 				end
 			</OnLeave>
 			<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\ChatFrameColorSwatch"/>
@@ -146,12 +146,12 @@ list frame: a listing of the creeps you have fought
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								if ( this:GetChecked() ) then
+								if ( self:GetChecked() ) then
 									PlaySound("igMainMenuOptionCheckBoxOff");
 								else
 									PlaySound("igMainMenuOptionCheckBoxOn");
 								end
-								KillLog_OptionsFrame_UpdateMaxOptions(this:GetChecked());
+								KillLog_OptionsFrame_UpdateMaxOptions(self:GetChecked());
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -177,12 +177,12 @@ list frame: a listing of the creeps you have fought
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								if ( this:GetChecked() ) then
+								if ( self:GetChecked() ) then
 									PlaySound("igMainMenuOptionCheckBoxOff");
 								else
 									PlaySound("igMainMenuOptionCheckBoxOn");
 								end
-								KillLog_OptionsFrame_UpdateStoreCreepOptions(this:GetChecked());
+								KillLog_OptionsFrame_UpdateStoreCreepOptions(self:GetChecked());
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -266,12 +266,12 @@ list frame: a listing of the creeps you have fought
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								if ( this:GetChecked() ) then
+								if ( self:GetChecked() ) then
 									PlaySound("igMainMenuOptionCheckBoxOff");
 								else
 									PlaySound("igMainMenuOptionCheckBoxOn");
 								end
-								KillLog_OptionsFrame_UpdateStoreLevel(this:GetChecked());
+								KillLog_OptionsFrame_UpdateStoreLevel(self:GetChecked());
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -294,12 +294,12 @@ list frame: a listing of the creeps you have fought
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								if ( this:GetChecked() ) then
+								if ( self:GetChecked() ) then
 									PlaySound("igMainMenuOptionCheckBoxOff");
 								else
 									PlaySound("igMainMenuOptionCheckBoxOn");
 								end
-								KillLog_OptionsFrame_UpdatePortraits(this:GetChecked());
+								KillLog_OptionsFrame_UpdatePortraits(self:GetChecked());
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -323,12 +323,12 @@ list frame: a listing of the creeps you have fought
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								if ( this:GetChecked() ) then
+								if ( self:GetChecked() ) then
 									PlaySound("igMainMenuOptionCheckBoxOff");
 								else
 									PlaySound("igMainMenuOptionCheckBoxOn");
 								end
-								KillLog_OptionsFrame_UpdateSCT(this:GetChecked());
+								KillLog_OptionsFrame_UpdateSCT(self:GetChecked());
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -352,12 +352,12 @@ list frame: a listing of the creeps you have fought
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								if ( this:GetChecked() ) then
+								if ( self:GetChecked() ) then
 									PlaySound("igMainMenuOptionCheckBoxOff");
 								else
 									PlaySound("igMainMenuOptionCheckBoxOn");
 								end
-								KillLog_OptionsFrame_UpdateDebugging(this:GetChecked());
+								KillLog_OptionsFrame_UpdateDebugging(self:GetChecked());
 							</OnClick>
 						</Scripts>
 					</CheckButton>

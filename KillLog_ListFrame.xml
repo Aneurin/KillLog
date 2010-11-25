@@ -72,14 +72,14 @@ list frame: a listing of the creeps you have fought
 		</Layers>
 		<Scripts>
 			<OnLoad>
-				this:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
 			<OnClick>
-				KillLog_ListTitleButton_OnClick(arg1);
+				KillLog_ListTitleButton_OnClick(self, ...);
 			</OnClick>
 			<OnLeave>
-				if (not KillLog_ListFrame.selectedCreepID or this:GetID() ~= (KillLog_ListFrame.selectedCreepID - FauxScrollFrame_GetOffset(KillLog_ListScrollFrame))) then
-					getglobal(this:GetName().."Tag"):SetTextColor(this.r, this.g, this.b);
+				if (not KillLog_ListFrame.selectedCreepID or self:GetID() ~= (KillLog_ListFrame.selectedCreepID - FauxScrollFrame_GetOffset(KillLog_ListScrollFrame))) then
+					getglobal(self:GetName().."Tag"):SetTextColor(self.r, self.g, self.b);
 				end
 			</OnLeave>
 		</Scripts>
@@ -257,11 +257,11 @@ list frame: a listing of the creeps you have fought
 
 						<Scripts>
 							<OnLoad>
-								--getglobal(this:GetName()):SetText(ALL);
+								--getglobal(self:GetName()):SetText(ALL);
 								getglobal("KillLog_ListFrameCollapseAllButtonTitle"):SetText(ALL);
 							</OnLoad>
 							<OnClick>
-								KillLog_ListFrame_CollapseAllButton_OnClick();
+								KillLog_ListFrame_CollapseAllButton_OnClick(self);
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -279,10 +279,10 @@ list frame: a listing of the creeps you have fought
 								if ( not KillLog_ListFrame.displayLevel ) then
 									KillLog_ListFrame.displayLevel = UnitLevel("player");
 								end
-								this:SetText(KILLLOG_LIST_LEVEL.." "..KillLog_ListFrame.displayLevel);
+								self:SetText(KILLLOG_LIST_LEVEL.." "..KillLog_ListFrame.displayLevel);
 							</OnShow>
 							<OnClick>
-								KillLog_ListFrame_Tab_OnClick();
+								KillLog_ListFrame_Tab_OnClick(self);
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -292,7 +292,7 @@ list frame: a listing of the creeps you have fought
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								KillLog_ListFrame_Tab_OnClick();
+								KillLog_ListFrame_Tab_OnClick(self);
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -302,12 +302,12 @@ list frame: a listing of the creeps you have fought
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								PanelTemplates_SelectTab(this);
-								PanelTemplates_TabResize(this, 0);
-								getglobal(this:GetName().."HighlightTexture"):SetWidth(this:GetTextWidth() + 31);
+								PanelTemplates_SelectTab(self);
+								PanelTemplates_TabResize(self, 0);
+								getglobal(self:GetName().."HighlightTexture"):SetWidth(self:GetTextWidth() + 31);
 							</OnLoad>
 							<OnClick>
-								KillLog_ListFrame_Tab_OnClick();
+								KillLog_ListFrame_Tab_OnClick(self);
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -327,7 +327,7 @@ list frame: a listing of the creeps you have fought
 						UIDropDownMenu_SetWidth(self, 54);
 					</OnLoad>
 					<OnShow>
-						KillLog_ListFrame_LevelDropDown_OnShow();
+						KillLog_ListFrame_LevelDropDown_OnShow(self);
 					</OnShow>
 				</Scripts>
 			</Frame>
@@ -375,7 +375,7 @@ list frame: a listing of the creeps you have fought
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						KillLog_List_TitleDropDown_OnLoad();
+						KillLog_List_TitleDropDown_OnLoad(self);
 					</OnLoad>
 				</Scripts>
 			</Frame>
@@ -779,7 +779,7 @@ list frame: a listing of the creeps you have fought
 						</Layers>
 						<Scripts>
 							<OnLoad>
-								this:SetFrameLevel(this:GetFrameLevel() + 2);
+								self:SetFrameLevel(self:GetFrameLevel() + 2);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -843,7 +843,7 @@ list frame: a listing of the creeps you have fought
 						KillLog_ListFrame_DetailCreepName:SetText("Ferocious Jackalope");
 						KillLog_ListFrame_DetailCreepSubName:SetText(KILLLOG_LABEL_LEVEL.." 97-99 Beast");
 						KillLog_ListFrame_DetailCreepLocation:SetText("Stonetalon Mountains 99,99");
-						this.portrait = "Default";
+						self.portrait = "Default";
 					</OnLoad>
 					<OnClick>
 						KillLog_ListDetailFrame_OnClick();
@@ -853,7 +853,7 @@ list frame: a listing of the creeps you have fought
 		</Frames>
 		<Scripts>
 			<OnLoad>
-				KillLog_ListFrame_OnLoad();
+				KillLog_ListFrame_OnLoad(self);
 			</OnLoad>
 			<OnShow>
 				KillLog_ListFrame_OnShow();

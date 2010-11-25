@@ -16,15 +16,15 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 	<Button name="KillLogFrameTabButtonTemplate" inherits="CharacterFrameTabButtonTemplate" virtual="true">
 		<Scripts>
 			<OnLoad>
-				this:SetFrameLevel(this:GetFrameLevel() + 4);
+				self:SetFrameLevel(self:GetFrameLevel() + 4);
 			</OnLoad>
 			<OnClick>
 				PanelTemplates_Tab_OnClick(self, KillLogFrame);
-				KillLogTab_OnClick();
+				KillLogTab_OnClick(self);
 			</OnClick>
 			<OnShow>
 				PanelTemplates_TabResize(self, 10);
-				getglobal(this:GetName().."HighlightTexture"):SetWidth(this:GetTextWidth() + 30);
+				getglobal(self:GetName().."HighlightTexture"):SetWidth(self:GetTextWidth() + 30);
 			</OnShow>
 		</Scripts>
 	</Button>
@@ -175,7 +175,7 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						this:SetFrameLevel(this:GetFrameLevel() + 4);
+						self:SetFrameLevel(self:GetFrameLevel() + 4);
 					</OnLoad>
 				</Scripts>
 			</Button>
@@ -218,7 +218,7 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 		</Frames>
 		<Scripts>
 			<OnLoad>
-				KillLogFrame_OnLoad();
+				KillLogFrame_OnLoad(self);
 			</OnLoad>
 			<OnEvent>
 				KillLogFrame_OnEvent(event);

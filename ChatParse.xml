@@ -17,7 +17,7 @@ Chat Parse: Used to scrape information from Chat Messages
 				ChatParse_OnLoad();
 			</OnLoad>
 			<OnEvent>
-				ChatParse_OnEvent(event);
+				ChatParse_OnEvent(self, event, ...);
 			</OnEvent>
 		</Scripts>
 	</Frame>

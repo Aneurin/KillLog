@@ -22,14 +22,14 @@ StaticPopupDialogs["KILLLOG_LIST_CHANGE_TYPE"] = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	hasEditBox = 1,
-	OnAccept = function()
-		KillLog_ListFrame_ChangeCreepType(KillLog_ListFrame.dropDownMenuID, getglobal(this:GetParent():GetName().."EditBox"):GetText());
+	OnAccept = function(self)
+		KillLog_ListFrame_ChangeCreepType(KillLog_ListFrame.dropDownMenuID, getglobal(self:GetParent():GetName().."EditBox"):GetText());
 	end,
-	EditBoxOnEnterPressed = function()
-		KillLog_ListFrame_ChangeCreepType(KillLog_ListFrame.dropDownMenuID, getglobal(this:GetParent():GetName().."EditBox"):GetText());
+	EditBoxOnEnterPressed = function(self)
+		KillLog_ListFrame_ChangeCreepType(KillLog_ListFrame.dropDownMenuID, getglobal(self:GetParent():GetName().."EditBox"):GetText());
 	end,
-	OnShow = function()
-		local editBox = getglobal(this:GetName().."EditBox");
+	OnShow = function(self)
+		local editBox = getglobal(self:GetName().."EditBox");
 		editBox:SetFocus();
 		local creepData = KillLog_ListFrame_GetCreepName(KillLog_ListFrame.dropDownMenuID);
 		local creepInfo = KillLog_CreepInfo[creepData.name];
@@ -37,11 +37,11 @@ StaticPopupDialogs["KILLLOG_LIST_CHANGE_TYPE"] = {
 			editBox:SetText(creepInfo.type);
 		end
 	end,
-	OnHide = function()
+	OnHide = function(self)
 		if ( ChatFrameEditBox:IsVisible() ) then
 			ChatFrameEditBox:SetFocus();
 		end
-		getglobal(this:GetName().."EditBox"):SetText("");
+		getglobal(self:GetName().."EditBox"):SetText("");
 	end,
 	timeout = 0,
 	exclusive = 1,
@@ -52,19 +52,19 @@ StaticPopupDialogs["KILLLOG_LIST_CHANGE_FAMILY"] = {
 	button1 = ACCEPT,
 	button2 = CANCEL,
 	hasEditBox = 1,
-	OnAccept = function()
+	OnAccept = function(self)
 		local creepData = KillLog_ListFrame_GetCreepName(KillLog_ListFrame.dropDownMenuID);
 		local creepInfo = KillLog_CreepInfo[creepData.name];
 		if ( creepInfo and creepInfo.family ) then
 			oldFamily = creepInfo.family
 		end
-		KillLog_ListFrame_ChangeCreepFamily(KillLog_ListFrame.dropDownMenuID, getglobal(this:GetParent():GetName().."EditBox"):GetText(), oldFamily);
+		KillLog_ListFrame_ChangeCreepFamily(KillLog_ListFrame.dropDownMenuID, getglobal(self:GetParent():GetName().."EditBox"):GetText(), oldFamily);
 	end,
-	EditBoxOnEnterPressed = function()
-		--KillLog_ListFrame_ChangeCreepFamily(KillLog_ListFrame.dropDownMenuID, getglobal(this:GetParent():GetName().."EditBox"):GetText());
+	EditBoxOnEnterPressed = function(self)
+		--KillLog_ListFrame_ChangeCreepFamily(KillLog_ListFrame.dropDownMenuID, getglobal(self:GetParent():GetName().."EditBox"):GetText());
 	end,
-	OnShow = function()
-		local editBox = getglobal(this:GetName().."EditBox");
+	OnShow = function(self)
+		local editBox = getglobal(self:GetName().."EditBox");
 		editBox:SetFocus();
 		local creepData = KillLog_ListFrame_GetCreepName(KillLog_ListFrame.dropDownMenuID);
 		local creepInfo = KillLog_CreepInfo[creepData.name];
@@ -72,11 +72,11 @@ StaticPopupDialogs["KILLLOG_LIST_CHANGE_FAMILY"] = {
 			editBox:SetText(creepInfo.family);
 		end
 	end,
-	OnHide = function()
+	OnHide = function(self)
 		if ( ChatFrameEditBox:IsVisible() ) then
 			ChatFrameEditBox:SetFocus();
 		end
-		getglobal(this:GetName().."EditBox"):SetText("");
+		getglobal(self:GetName().."EditBox"):SetText("");
 	end,
 	timeout = 0,
 	exclusive = 1,
@@ -92,10 +92,10 @@ StaticPopupDialogs["KILLLOG_LIST_DELETE"] = {
 	timeout = 0
 };
 
-function KillLog_ListFrame_OnLoad()
-	this.display = { };
-	this.selectedCreepID = nil;
-	this.selectedCreepName = nil;
+function KillLog_ListFrame_OnLoad(self)
+	self.display = { };
+	self.selectedCreepID = nil;
+	self.selectedCreepName = nil;
 end
 
 function KillLog_ListFrame_OnShow()
@@ -637,8 +637,8 @@ function KillLog_ListFrame_DefineDisplay()
 end
 
 
-function KillLog_ListTitleButton_OnClick(button)
-	local creepID = this:GetID() + FauxScrollFrame_GetOffset(KillLog_ListScrollFrame);
+function KillLog_ListTitleButton_OnClick(self, button)
+	local creepID = self:GetID() + FauxScrollFrame_GetOffset(KillLog_ListScrollFrame);
 	if ( button == "LeftButton" ) then 
 		KillLog_ListFrame_SetSelection(creepID);
 		KillLog_ListFrame_Update();
@@ -647,7 +647,7 @@ function KillLog_ListTitleButton_OnClick(button)
 		creepData = KillLog_ListFrame_GetCreepName(creepID);
 		if ( creepData and not creepData.isHeader ) then
 			KillLog_ListFrame.dropDownMenuID = creepID;
-			ToggleDropDownMenu(1, nil, KillLog_List_TitleDropDown, "KillLog_List_Title"..this:GetID(), 10, 0);
+			ToggleDropDownMenu(1, nil, KillLog_List_TitleDropDown, "KillLog_List_Title"..self:GetID(), 10, 0);
 		end
 	end
 end
@@ -660,14 +660,14 @@ function KillLog_ListDetailFrame_OnClick(button)
 end
 
 
-function KillLog_ListFrame_CollapseAllButton_OnClick()
-	if ( this.collapsed ) then
+function KillLog_ListFrame_CollapseAllButton_OnClick(self)
+	if ( self.collapsed ) then
 		KillLog_ListFrame_ExpandHeader(0);
-		this.collapsed = nil;
+		self.collapsed = nil;
 	else
 		KillLog_ListFrame_CollapseHeader(0);
 		KillLog_ListScrollFrameScrollBar:SetValue(0);
-		this.collapsed = true;
+		self.collapsed = true;
 	end
 end
 
@@ -686,14 +686,14 @@ function KillLog_ListFrame_GetFirstValidSelection()
 end
 
 
-function KillLog_ListFrame_Tab_OnClick()
-	tabID = this:GetID();
+function KillLog_ListFrame_Tab_OnClick(self)
+	tabID = self:GetID();
 	if ( KillLog_ListFrame.selectedTab == tabID ) then
 		return;
 	end
 
 	PanelTemplates_DeselectTab(getglobal("KillLog_ListFrame_ToggleTab"..KillLog_ListFrame.selectedTab));
-	PanelTemplates_SelectTab(this);
+	PanelTemplates_SelectTab(self);
 	KillLog_ListFrame.selectedTab = tabID;
 
 	if ( tabID == 1 ) then
@@ -749,7 +749,7 @@ end
 
 -- sort drop down
 function KillLog_ListFrame_SortDropDown_OnLoad(self)
-	UIDropDownMenu_Initialize(this, KillLog_ListFrame_SortDropDown_Initialize);
+	UIDropDownMenu_Initialize(self, KillLog_ListFrame_SortDropDown_Initialize);
 	UIDropDownMenu_SetWidth(self, 90);
 	UIDropDownMenu_SetSelectedID(KillLog_ListFrame_SortDropDown, 1);
 	KillLog_ListFrame.getSortInfo = KILLLOG_LIST_SORT[1].infoFunc;
@@ -780,10 +780,10 @@ function KillLog_ListFrame_SortDropDown_Initialize()
 	end
 end
 
-function KillLog_ListFrame_SortDropDownButton_OnClick()
-	UIDropDownMenu_SetSelectedID(KillLog_ListFrame_SortDropDown, this:GetID());
+function KillLog_ListFrame_SortDropDownButton_OnClick(self)
+	UIDropDownMenu_SetSelectedID(KillLog_ListFrame_SortDropDown, self:GetID());
 
-	KillLog_ListFrame.getSortInfo = KILLLOG_LIST_SORT[this:GetID()].infoFunc;
+	KillLog_ListFrame.getSortInfo = KILLLOG_LIST_SORT[self:GetID()].infoFunc;
 
 	KillLog_ListFrame.selectedCreepID = nil;
 	KillLog_ListFrame_DefineDisplay();
@@ -793,7 +793,7 @@ end
 
 
 -- level drop down
-function KillLog_ListFrame_LevelDropDown_OnShow()
+function KillLog_ListFrame_LevelDropDown_OnShow(self)
 	KillLog_ListFrame.levelValues = { };
     
 	local index, data;
@@ -804,7 +804,7 @@ function KillLog_ListFrame_LevelDropDown_OnShow()
 			end
 		end
 	end
-	UIDropDownMenu_Initialize(this, KillLog_ListFrame_LevelDropDown_Initialize);
+	UIDropDownMenu_Initialize(self, KillLog_ListFrame_LevelDropDown_Initialize);
 	if ( table.getn(KillLog_ListFrame.levelValues) < 2 ) then
 		KillLog_ListFrame_LevelDropDownButton:Disable();
 		if ( table.getn(KillLog_ListFrame.levelValues) == 1 ) then
@@ -813,7 +813,7 @@ function KillLog_ListFrame_LevelDropDown_OnShow()
 	else
 		QuickSort(KillLog_ListFrame.levelValues, function(a,b) return a > b; end);
 		if ( not KillLog_ListFrame_LevelDropDown.selectedID ) then
-			UIDropDownMenu_SetSelectedID(this, 1);
+			UIDropDownMenu_SetSelectedID(self, 1);
 		end
         KillLog_ListFrame_LevelDropDownText:SetText(KillLog_ListFrame.levelValues[KillLog_ListFrame_LevelDropDown.selectedID]);
 	end
@@ -835,10 +835,10 @@ function KillLog_ListFrame_LevelDropDown_Initialize()
 	end
 end
 
-function KillLog_ListFrame_LevelDropDownButton_OnClick()
-	UIDropDownMenu_SetSelectedID(KillLog_ListFrame_LevelDropDown, this:GetID());
+function KillLog_ListFrame_LevelDropDownButton_OnClick(self)
+	UIDropDownMenu_SetSelectedID(KillLog_ListFrame_LevelDropDown, self:GetID());
 
-	KillLog_ListFrame.displayLevel = KillLog_ListFrame.levelValues[this:GetID()];
+	KillLog_ListFrame.displayLevel = KillLog_ListFrame.levelValues[self:GetID()];
 	KillLog_ListFrame_ToggleTab3:SetText(KILLLOG_LIST_LEVEL.." "..KillLog_ListFrame.displayLevel);
 
 	if ( KillLog_ListFrame.selectedTab == 3 ) then
@@ -851,8 +851,8 @@ function KillLog_ListFrame_LevelDropDownButton_OnClick()
 end
 
 -- title drop down
-function KillLog_List_TitleDropDown_OnLoad()
-	UIDropDownMenu_Initialize(this, KillLog_List_TitleDropDown_Initialize, "MENU");
+function KillLog_List_TitleDropDown_OnLoad(self)
+	UIDropDownMenu_Initialize(self, KillLog_List_TitleDropDown_Initialize, "MENU");
 end
 
 function KillLog_List_TitleDropDown_Initialize()

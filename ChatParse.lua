@@ -54,16 +54,16 @@ function ChatParse_OnLoad()
 	end
 end
 
-function ChatParse_OnEvent(event)
+function ChatParse_OnEvent(self, event, message)
 	if ( not ChatParse_Events[event] ) then
-		--this:UnregisterEvent(event);
+		--self:UnregisterEvent(event);
 		DebugMessage("CP", "OnEvent("..event..") called but nothing registered...", "warning");
 	else
 		local index, info, match, processed, string;
 		processed = { };
 		for index, info in pairs(ChatParse_Events[event]) do
 			if ( not info.AddOn or not processed[info.AddOn] ) then
-				match = ChatParse_MatchPattern(arg1, info.patternSpec);
+				match = ChatParse_MatchPattern(message, info.patternSpec);
 				if ( match ) then
 					result = info.func(match);
 					if ( not result and info.AddOn ) then
