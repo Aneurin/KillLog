@@ -1330,7 +1330,7 @@ function KillLog_UpdateData()
 
 end
 
---	Same as GetDifficultyColor but also accepts characterLevel to compare based upon
+--	Same as GetQuestDifficultyColor but also accepts characterLevel to compare based upon
 --  when you are level 40 looking at what you killed at level 20, it should be colored
 --  as if you were level 20
 function KillLog_GetDifficultyColor(creepLevel, atCharacterLevel)
@@ -1338,12 +1338,12 @@ function KillLog_GetDifficultyColor(creepLevel, atCharacterLevel)
 	local atLevelDiff = 0;
 	local actualLevel = 0;
 	if ( not atCharacterLevel or atCharacterLevel == characterLevel ) then
-		return GetDifficultyColor(creepLevel);
+		return GetQuestDifficultyColor(creepLevel);
 	else
 		atLevelDiff = creepLevel - atCharacterLevel;
 		actualLevel = atLevelDiff + characterLevel;
 		
-		return GetDifficultyColor(actualLevel);
+		return GetQuestDifficultyColor(actualLevel);
 	end
 end
 
