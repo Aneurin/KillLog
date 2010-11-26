@@ -151,7 +151,7 @@ function KillLog_ListFrame_Update()
 					creepTitle:SetNormalTexture("Interface\\Buttons\\UI-MinusButton-Up");
 				end
 				creepHighlight:SetTexture("Interface\\Buttons\\UI-PlusButton-Hilight");
-				color = QuestDifficultyColor["header"];
+				color = QuestDifficultyColors["header"];
 
 				tag = creepData.tag;
 			else
