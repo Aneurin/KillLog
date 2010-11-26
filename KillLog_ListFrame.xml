@@ -75,7 +75,7 @@ list frame: a listing of the creeps you have fought
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
 			<OnClick>
-				KillLog_ListTitleButton_OnClick(self, ...);
+				KillLog_ListTitleButton_OnClick(self, arg1);
 			</OnClick>
 			<OnLeave>
 				if (not KillLog_ListFrame.selectedCreepID or self:GetID() ~= (KillLog_ListFrame.selectedCreepID - FauxScrollFrame_GetOffset(KillLog_ListScrollFrame))) then

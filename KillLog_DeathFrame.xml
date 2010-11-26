@@ -38,7 +38,7 @@ death frame: Listing of your deaths
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
             <OnClick>
-				KillLog_DeathFrame_OnClick(self, ...);
+				KillLog_DeathFrame_OnClick(self, button)
 			</OnClick>
 		</Scripts>
 	</Button>
