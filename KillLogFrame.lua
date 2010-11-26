@@ -693,14 +693,14 @@ function KillLogFrame_LoadData()
 	chatParseInfo.event    = "SWING_DAMAGE";
 	chatParseInfo.template   = { srcName = "srcName", srcFlags = "srcFlags",
                                     dstName = "creepName", dstFlags = "dstFlags",
-                                    [1] = "damage", [6] = "crit" };
+                                    [1] = "damage", [7] = "crit" };
 	CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
 --#Region Spell Combat Messages
 	chatParseInfo.event    = "SPELL_DAMAGE";
         chatParseInfo.template   = { srcName = "srcName", srcFlags = "srcFlags",
                                     dstName = "creepName", dstFlags = "dstFlags",
-                                    [2] = "spell", [4] = "damage", [9] = "crit" };
+                                    [2] = "spell", [4] = "damage", [10] = "crit" };
 	CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
 --#Region Ranged Combat Messages
