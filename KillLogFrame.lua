@@ -639,7 +639,7 @@ function KillLogFrame_LoadData()
           else
             crit = KILLLOG_LABEL_HIT
           end
-          KillLogFrame_CheckMaxDamage(attackName, crit, t.damage, KILLLOG_LABEL_DAMAGE);
+          KillLogFrame_CheckMaxDamage(attackName, crit, t.damage);
         end;
         chatParseInfo.func     = logDamageDealt;
 
@@ -898,7 +898,7 @@ function KillLogFrame_CheckMaxDamage(attackName, attackType, attackDamage, damag
 	if ( not KillLog_Options.storeMax or not KillLog_AllCharacterData or not KillLog_AllCharacterData["max"] ) then
 		return;
 	else
-		DebugMessage("KL", "Checking Max Damage: "..attackName.." "..attackType.." "..attackDamage.." "..damage, "helper");
+		DebugMessage("KL", "Checking Max Damage: "..attackName.." "..attackType.." "..attackDamage, "helper");
 		attackDamage = 0 + attackDamage;
 		if ( not KillLog_AllCharacterData["max"][attackName] ) then
 			KillLog_AllCharacterData["max"][attackName] = { hit = 0, crit = 0 };

@@ -22,7 +22,6 @@ KILLLOG_LABEL_DEFAULT             = "Default";
 KILLLOG_LABEL_PET                 = "(pet)";
 KILLLOG_LABEL_HIT                 = "hit";
 KILLLOG_LABEL_CRIT                = "crit";
-KILLLOG_LABEL_DAMAGE			  = "hit";
 KILLLOG_LABEL_HEAL				  = "heals";
 
 -- text for GUI top tabs on LIST tab
