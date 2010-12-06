@@ -159,12 +159,6 @@ function KillLogLoadingFrame_OnEvent(event)
 		end
 	elseif ( event == "PLAYER_ENTERING_WORLD" ) then
 		local characterLevel = UnitLevel("player");
-		if ( KillLog_Options.maxLevel ) then
-			if ( characterLevel == KillLog_Options.maxLevel ) then
-				KillLogFrame.NoXpGain = true;
-				DebugMessage("KL", "Set NoXpGain OnEvent", "helper");
-			end
-		end
 	end
 end
 
@@ -406,23 +400,11 @@ function KillLogFrame_OnEvent(event)
 	elseif ( event == "PLAYER_TARGET_CHANGED" ) then
 		KillLogFrame_RecordCreepInfo("target");
        	local characterLevel = UnitLevel("player");
-        if ( characterLevel == KillLog_Options.maxLevel ) then
-			KillLogFrame.NoXpGain = true;
-            if ( KillLogFrame.NoXpGain ) then
-				DebugMessage("KL", "NoXpGain set to True", "info");
-			end
-		end
 	elseif ( event == "UPDATE_MOUSEOVER_UNIT" ) then
 		KillLogFrame_RecordCreepInfo("mouseover");
 		local characterLevel = UnitLevel("player");
 		if ( UnitExists("mouseover") and not UnitPlayerControlled("mouseover") and KillLog_Options.tooltip ) then
 			KillLog_Tooltip();
-		end
-        if ( characterLevel == KillLog_Options.maxLevel ) then
-			KillLogFrame.NoXpGain = true;
-            if ( KillLogFrame.NoXpGain ) then
-				DebugMessage("KL", "NoXpGain set to True", "info");
-			end
 		end
 	elseif ( event == "PLAYER_XP_UPDATE" ) then
 		DebugMessage("KL", "event: "..event, "function");
@@ -435,12 +417,6 @@ function KillLogFrame_OnEvent(event)
 		local characterLevel = UnitLevel("player");
 		if ( characterLevel == 70 ) then
 			KillLog_Options.maxLevel = 70
-		end
-		if ( characterLevel == KillLog_Options.maxLevel ) then
-			KillLogFrame.NoXpGain = true;
-            if ( KillLogFrame.NoXpGain ) then
-				DebugMessage("KL", "NoXpGain set to True", "info");
-			end
 		end
 		if ( not KillLog_ListFrame:IsVisible() ) then
 			KillLog_ListFrame.displayLevel = characterLevel;
@@ -515,11 +491,7 @@ function KillLogFrame_LoadData()
 		end
 	end
 	
-	if ( KillLog_Options.maxLevel ) then
-		if ( characterLevel == KillLog_Options.maxLevel ) then
-			KillLogFrame.NoXpGain = true;
-		end
-	else
+	if ( not KillLog_Options.maxLevel ) then
 		KillLog_Options.maxLevel = KILLLOG_MAX_LEVEL;
 		DebugMessage("KL", "characterLevel: "..KillLog_Options.maxLevel, "info");
 	end
