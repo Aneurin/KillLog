@@ -77,9 +77,14 @@ list frame: a listing of the creeps you have fought
 			<OnClick>
 				KillLog_ListTitleButton_OnClick(self, button);
 			</OnClick>
+			<OnEnter>
+				getglobal(self:GetName().."Tag"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+				getglobal(self:GetName().."Creep"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+			</OnEnter>
 			<OnLeave>
 				if (not KillLog_ListFrame.selectedCreepID or self:GetID() ~= (KillLog_ListFrame.selectedCreepID - FauxScrollFrame_GetOffset(KillLog_ListScrollFrame))) then
 					getglobal(self:GetName().."Tag"):SetTextColor(self.r, self.g, self.b);
+					getglobal(self:GetName().."Creep"):SetTextColor(self.r, self.g, self.b);
 				end
 			</OnLeave>
 		</Scripts>
