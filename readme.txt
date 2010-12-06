@@ -12,6 +12,18 @@ New
 -------
 Updates
 -------
++ Version 4.0.3
+  * Changes:-
+    Update for WoW 4.0
+    Removed a lot of dead code
+  * Bug Fixes
+    Creep list is once again coloured appropriately
+    Old creep data will be correctly expired when the number of levels to store
+    is greater than 70 but less than the current character level.
+  * Known Issues:
+    The number of levels to track isn't automatically increased. If you
+    currently have it set to 80 and want to store all creep history then you'll
+    need to increase it to 85 in tho options pane.
 + Version 2.99.0
   * Changes:-
     Update for WoW 3.0.2.
@@ -32,7 +44,7 @@ Updates
     This means it infers the killer based on who hit the player last,
     according to the combat log. Consequently it may (in theory) suffer
     from races, if combat messages do not arrive in the correct order, and
-    it can't track environmental deaths (falling, drowning, lava, ...).)
+    it can't track environmental deaths (falling, drowning, lava, ...).
 
 + Version 2.6.9
   * Changes:-
@@ -79,23 +91,23 @@ Updates
 
 + Version 2.5.1
   * Bug Fixes:-
-	- Fixed issue with maxLevel not being set with a fresh install.
+    - Fixed issue with maxLevel not being set with a fresh install.
 
 + Version 2.5.0
   * Additions:-
-	- Check for TBC level 70 compatability.
-	- Reworked the way the 'Family' information was updated (see notes below)
-	- Debugging can now be enabled from the options menu
-	- Debug levels 1 - 3 disabled.
+    - Check for TBC level 70 compatability.
+    - Reworked the way the 'Family' information was updated (see notes below)
+    - Debugging can now be enabled from the options menu
+    - Debug levels 1 - 3 disabled.
 
 
 + Version 2.4.9
   * Additions:-
-	- Added 2 new sorting levels to the dropdown menus, Class and Location
-	- Made support for SCT optional, enable in the options tab.
-	- Added option to change display color for the maximum damage notification.
+    - Added 2 new sorting levels to the dropdown menus, Class and Location
+    - Made support for SCT optional, enable in the options tab.
+    - Added option to change display color for the maximum damage notification.
   * Data Updates:-
-	- Slight change to how the coordinates are saved to the database, allows for a reduction in memory usage.
+    - Slight change to how the coordinates are saved to the database, allows for a reduction in memory usage.
 
 
 + Version 2.4.8
@@ -104,18 +116,18 @@ Updates
   * Bug Fixes:-
     - Fixed issue with debugging being enabled by default instead of being disabled
     - Fixed error with checking current level information. (Problem with switching to a new character with a fresh install)
-    
+
 
 + Version 2.4.7
   * Additions:-
-	- Expanded Total Kills and Total Deaths on the General Tab to show all sources of your deaths and kills.
-	  (Thanks to Dridzt for the suggestion)
-	- Maximum hit and crit information sent to SCT if installed
-	  (Thanks to IRID1UM for the suggestion)
+    - Expanded Total Kills and Total Deaths on the General Tab to show all sources of your deaths and kills.
+      (Thanks to Dridzt for the suggestion)
+    - Maximum hit and crit information sent to SCT if installed
+      (Thanks to IRID1UM for the suggestion)
   * Bug Fixes:-
-	- Corrected issue with not being credited with the kill if the mob didnt give you xp.
-	- Adjusted the ScrollFrame on the General Tab to view extra data missing from the end.
- 
+    - Corrected issue with not being credited with the kill if the mob didnt give you xp.
+    - Adjusted the ScrollFrame on the General Tab to view extra data missing from the end.
+
 
 + Version 2.4.6b
   * Updated to WoW 20003
@@ -124,18 +136,18 @@ Updates
 
 + Version 2.4.6
   * Additions:-
-	- Added another debuging level (avoid using levels below 4 as all it will do is spam you to
-	  death with useless information)
+    - Added another debuging level (avoid using levels below 4 as all it will do is spam you to
+      death with useless information)
   * Bug Fixes:-
-	- Fixed error with current level information being missing from the database. (Happens if updating from 
-	  older version of KillLog while gaining additional levels that are not recorded)
+    - Fixed error with current level information being missing from the database. (Happens if updating from
+      older version of KillLog while gaining additional levels that are not recorded)
 
 
 + Version 2.3.1:
   * Additions:-
-	- Added ability to store unknown creep family to database and to specify which family you want
-	- Changed format of Death list
-	- Expanded debug functionality to include adding a creep family you specify to the database
+    - Added ability to store unknown creep family to database and to specify which family you want
+    - Changed format of Death list
+    - Expanded debug functionality to include adding a creep family you specify to the database
 
 -----
 Notes
