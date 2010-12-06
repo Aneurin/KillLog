@@ -424,7 +424,7 @@ function KillLogFrame_OnEvent(event)
 		if ( KillLog_Options.storeLevel and KillLog_AllCharacterData["level"] and not KillLog_AllCharacterData["level"][characterLevel] ) then
 			KillLog_AllCharacterData["level"][characterLevel] = { };
 
-			if ( KillLog_Options.storeLevel < KillLog_Options.maxLevel ) then
+			if ( KillLog_Options.storeLevel < characterLevel ) then
 				local level, levelCount;
 				levelCount = 0;
 				for level = characterLevel, 1, -1 do
