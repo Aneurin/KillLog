@@ -156,8 +156,6 @@ function KillLogLoadingFrame_OnEvent(event)
 		if ( KillLogLoadingFrame.init >= 1 ) then
 			KillLogFrame_LoadData();
 		end
-	elseif ( event == "PLAYER_ENTERING_WORLD" ) then
-		local characterLevel = UnitLevel("player");
 	end
 end
 
@@ -398,16 +396,13 @@ function KillLogFrame_OnEvent(event)
 		KillLog_FreeMemory();
 	elseif ( event == "PLAYER_TARGET_CHANGED" ) then
 		KillLogFrame_RecordCreepInfo("target");
-       	local characterLevel = UnitLevel("player");
 	elseif ( event == "UPDATE_MOUSEOVER_UNIT" ) then
 		KillLogFrame_RecordCreepInfo("mouseover");
-		local characterLevel = UnitLevel("player");
 		if ( UnitExists("mouseover") and not UnitPlayerControlled("mouseover") and KillLog_Options.tooltip ) then
 			KillLog_Tooltip();
 		end
 	elseif ( event == "PLAYER_XP_UPDATE" ) then
 		DebugMessage("KL", "event: "..event, "function");
-		local characterLevel = UnitLevel("player");
 	elseif ( event == "UNIT_LEVEL" ) then
 		local characterLevel = UnitLevel("player");
 		if ( not KillLog_ListFrame:IsVisible() ) then
