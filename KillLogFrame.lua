@@ -14,8 +14,7 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 ---------------
 
 KILLLOG_VERSION = GetAddOnMetadata('KillLog', 'Version');
-KILLLOG_DATA_VERSION = 10;
-KILLLOG_MAX_LEVEL = 60;
+KILLLOG_DATA_VERSION = 11;
 
 local titleGreen 		= "|CFF00FF00";
 local titleYellow 		= "|CFFFFFF00";
@@ -409,15 +408,8 @@ function KillLogFrame_OnEvent(event)
 	elseif ( event == "PLAYER_XP_UPDATE" ) then
 		DebugMessage("KL", "event: "..event, "function");
 		local characterLevel = UnitLevel("player");
-		if ( characterLevel >= 60 ) then
-			KillLog_Options.maxLevel = 70;
-			DebugMessage("KL", "maxLevel: "..KillLog_Options.maxLevel, "function");
-		end
 	elseif ( event == "UNIT_LEVEL" ) then
 		local characterLevel = UnitLevel("player");
-		if ( characterLevel == 70 ) then
-			KillLog_Options.maxLevel = 70
-		end
 		if ( not KillLog_ListFrame:IsVisible() ) then
 			KillLog_ListFrame.displayLevel = characterLevel;
 		end
@@ -489,11 +481,6 @@ function KillLogFrame_LoadData()
 		if ( KillLog_CharacterData ) then
 			KillLog_UpdateData();
 		end
-	end
-	
-	if ( not KillLog_Options.maxLevel ) then
-		KillLog_Options.maxLevel = KILLLOG_MAX_LEVEL;
-		DebugMessage("KL", "characterLevel: "..KillLog_Options.maxLevel, "info");
 	end
 	
 	if ( not KillLog_Options.version or not KillLog_Options.debugLevel or KillLog_Options.version ~= KILLLOG_VERSION ) then
@@ -1230,7 +1217,6 @@ function KillLog_UpdateData()
 		KillLog_Options.version = KILLLOG_VERSION;
 		KillLog_Options.sctSupport = true;
 		KillLog_Options.color = {r = 1.0, g = 1.0, b = 1.0}
-		KillLog_Options.maxLevel = KILLLOG_MAX_LEVEL;
 
 		KillLog_Options.debugLevel = nil;
 		KillLog_Options.dataVersion = 8;
@@ -1268,6 +1254,17 @@ function KillLog_UpdateData()
 		KillLog_Options.debugLevel = nil;
 		KillLog_Options.dataVersion = 10;
 		
+	-- data version 10 => 11
+	elseif ( KillLog_Options.dataVersion == 10 ) then
+		local debugLevel = KillLog_Options.debugLevel;
+		KillLog_Options.debugLevel = 4;
+		DebugMessage("KL", "Updating Saved Data", "warning");
+		if ( KillLog_Options.maxLevel ) then
+			KillLog_Options.maxLevel = nil
+		end
+		KillLog_Options.debugLevel = debugLevel;
+		KillLog_Options.dataVersion = 11;
+
 		-- data version ???? => current
 		-- since we are attempting to update the data in a while loop, this will ensure that nothing
 		-- strange happens causing an infinite loop
