@@ -707,31 +707,6 @@ function KillLogFrame_LoadData()
         chatParseInfo.event    = "RANGE_DAMAGE";
         CombatParse_RegisterEvent(chatParseInfo);
 --#Endregion
---#Region Healing Messages	
-	--[[ Healing Spells
-	chatParseInfo.event =	"CHAT_MSG_SPELL_SELF_BUFF";
-	chatParseInfo.func     = function(t) KillLogFrame_CheckMaxDamage(t.spell, KILLLOG_LABEL_HIT, t.damage, KILLLOG_LABEL_HEAL); end;
-	chatParseInfo.template = HEALEDSELFSELF; -- "Your %s heals you for %d."
-	chatParseInfo.fields   = { "spell", "damage" };
-	ChatParse_RegisterEvent(chatParseInfo);
-	
-	chatParseInfo.func     = function(t) KillLogFrame_CheckMaxDamage(t.spell, KILLLOG_LABEL_CRIT, t.damage, KILLLOG_LABEL_HEAL); 
-							 			 DebugMessage("KL", "Spell name: "..t.spell, "warning");	 
-							 end;
-	chatParseInfo.template = HEALEDCRITSELFSELF; -- "Your %s critically heals you for %d"
-	chatParseInfo.fields   = { "spell", "damage" };
-	ChatParse_RegisterEvent(chatParseInfo);
-	
-	chatParseInfo.func     = function(t) KillLogFrame_CheckMaxDamage(t.spell, KILLLOG_LABEL_HIT, t.damage, KILLLOG_LABEL_HEAL); end;
-	chatParseInfo.template = HEALEDSELFOTHER; -- "Your %s heals %s for %d."
-	chatParseInfo.fields   = { "spell", "creepName", "damage" };
-	ChatParse_RegisterEvent(chatParseInfo);
-
-	chatParseInfo.func     = function(t) KillLogFrame_CheckMaxDamage(t.spell, KILLLOG_LABEL_CRIT, t.damage, KILLLOG_LABEL_HEAL); end;
-	chatParseInfo.template = HEALEDCRITSELFOTHER; -- "Your %s critically heals %s for %d."
-	chatParseInfo.fields   = { "spell", "creepName", "damage" };
-	ChatParse_RegisterEvent(chatParseInfo);]]
---#Endregion
 --#Region Creature Kill Messages
 	chatParseInfo.event    	= "PARTY_KILL";
 	chatParseInfo.func     	= 	function(t) KillLogFrame_RecordData({creepName = t.creepName}, "kill",1); end;
