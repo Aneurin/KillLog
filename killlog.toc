@@ -1,9 +1,9 @@
-## Interface: 40000
+## Interface: 40100
 ## Title: Kill Log
 ## Author: Frenn, Detritis, Waywocket
-## Version: 4.0.3
+## Version: 4.1.0
 ## Notes: This AddOn keeps a record of your exploits fighting creeps in Azeroth.
-## X-Date: December 6, 2010
+## X-Date: May 16, 2011
 ## X-Version: KILLLOG_VERSION
 ## X-Category: MYADDONS_CATEGORY_COMBAT
 ## X-Help: KillLog_Help

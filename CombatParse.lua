@@ -29,7 +29,7 @@ function CombatParse_RegisterEvent(info)
   table.insert(CombatParse_Events[info.event], { func = info.func, mapping = info.template });
 end
 
-function CombatParse_OnEvent(self, event, timestamp, combat_event, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
+function CombatParse_OnEvent(self, event, timestamp, combat_event, hideCaster, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
  --if (event ~= "COMBAT_LOG_EVENT_UNFILTERED") then return
   local listeners = CombatParse_Events[combat_event];
   if not listeners then return end; -- nobody cares about this event

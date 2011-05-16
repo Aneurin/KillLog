@@ -12,6 +12,9 @@ New
 -------
 Updates
 -------
++ Version 4.1.0
+  * Changes:-
+    Update for WoW 4.1
 + Version 4.0.3
   * Changes:-
     Update for WoW 4.0
