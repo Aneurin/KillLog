@@ -12,9 +12,15 @@ New
 -------
 Updates
 -------
+
++ Version 4.2.0
+  * Changes:-
+    Update for WoW 4.2
+
 + Version 4.1.0
   * Changes:-
     Update for WoW 4.1
+
 + Version 4.0.3
   * Changes:-
     Update for WoW 4.0
@@ -27,6 +33,7 @@ Updates
     The number of levels to track isn't automatically increased. If you
     currently have it set to 80 and want to store all creep history then you'll
     need to increase it to 85 in tho options pane.
+
 + Version 2.99.0
   * Changes:-
     Update for WoW 3.0.2.
@@ -66,6 +73,7 @@ Updates
     example it is not possible to unregister for an event, and the registrant
     must know the order of arguments provided by the registered event.
     This system is currently not documented.
+
 + Version 2.6.2a
   * Bug Fixes:-
     Fixes bug with debugging messages with fresh installs only (this version is not needed if you are updating from an earlier version)
