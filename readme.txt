@@ -13,6 +13,11 @@ New
 Updates
 -------
 
++ Version 5.0.4
+  * Changes:-
+    Update for WoW 5.0
+    Allow storing up to 90 levels of monsters, to reflect MoP level cap.
+
 + Version 4.2.0
   * Changes:-
     Update for WoW 4.2
