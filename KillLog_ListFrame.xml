@@ -78,13 +78,13 @@ list frame: a listing of the creeps you have fought
 				KillLog_ListTitleButton_OnClick(self, button);
 			</OnClick>
 			<OnEnter>
-				getglobal(self:GetName().."Tag"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-				getglobal(self:GetName().."Creep"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+				_G[self:GetName().."Tag"]:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+				_G[self:GetName().."Creep"]:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 			</OnEnter>
 			<OnLeave>
 				if (not KillLog_ListFrame.selectedCreepID or self:GetID() ~= (KillLog_ListFrame.selectedCreepID - FauxScrollFrame_GetOffset(KillLog_ListScrollFrame))) then
-					getglobal(self:GetName().."Tag"):SetTextColor(self.r, self.g, self.b);
-					getglobal(self:GetName().."Creep"):SetTextColor(self.r, self.g, self.b);
+					_G[self:GetName().."Tag"]:SetTextColor(self.r, self.g, self.b);
+					_G[self:GetName().."Creep"]:SetTextColor(self.r, self.g, self.b);
 				end
 			</OnLeave>
 		</Scripts>
@@ -262,8 +262,7 @@ list frame: a listing of the creeps you have fought
 
 						<Scripts>
 							<OnLoad>
-								--getglobal(self:GetName()):SetText(ALL);
-								getglobal("KillLog_ListFrameCollapseAllButtonTitle"):SetText(ALL);
+								_G["KillLog_ListFrameCollapseAllButtonTitle"]:SetText(ALL);
 							</OnLoad>
 							<OnClick>
 								KillLog_ListFrame_CollapseAllButton_OnClick(self);
@@ -309,7 +308,7 @@ list frame: a listing of the creeps you have fought
 							<OnLoad>
 								PanelTemplates_SelectTab(self);
 								PanelTemplates_TabResize(self, 0);
-								getglobal(self:GetName().."HighlightTexture"):SetWidth(self:GetTextWidth() + 31);
+								_G[self:GetName().."HighlightTexture"]:SetWidth(self:GetTextWidth() + 31);
 							</OnLoad>
 							<OnClick>
 								KillLog_ListFrame_Tab_OnClick(self);

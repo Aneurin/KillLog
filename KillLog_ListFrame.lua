@@ -23,13 +23,13 @@ StaticPopupDialogs["KILLLOG_LIST_CHANGE_TYPE"] = {
 	button2 = CANCEL,
 	hasEditBox = 1,
 	OnAccept = function(self)
-		KillLog_ListFrame_ChangeCreepType(KillLog_ListFrame.dropDownMenuID, getglobal(self:GetParent():GetName().."EditBox"):GetText());
+		KillLog_ListFrame_ChangeCreepType(KillLog_ListFrame.dropDownMenuID, _G[self:GetParent():GetName().."EditBox"]:GetText());
 	end,
 	EditBoxOnEnterPressed = function(self)
-		KillLog_ListFrame_ChangeCreepType(KillLog_ListFrame.dropDownMenuID, getglobal(self:GetParent():GetName().."EditBox"):GetText());
+		KillLog_ListFrame_ChangeCreepType(KillLog_ListFrame.dropDownMenuID, _G[self:GetParent():GetName().."EditBox"]:GetText());
 	end,
 	OnShow = function(self)
-		local editBox = getglobal(self:GetName().."EditBox");
+		local editBox = _G[self:GetName().."EditBox"];
 		editBox:SetFocus();
 		local creepData = KillLog_ListFrame_GetCreepName(KillLog_ListFrame.dropDownMenuID);
 		local creepInfo = KillLog_CreepInfo[creepData.name];
@@ -41,7 +41,7 @@ StaticPopupDialogs["KILLLOG_LIST_CHANGE_TYPE"] = {
 		if ( ChatFrameEditBox:IsVisible() ) then
 			ChatFrameEditBox:SetFocus();
 		end
-		getglobal(self:GetName().."EditBox"):SetText("");
+		_G[self:GetName().."EditBox"]:SetText("");
 	end,
 	timeout = 0,
 	exclusive = 1,
@@ -58,13 +58,13 @@ StaticPopupDialogs["KILLLOG_LIST_CHANGE_FAMILY"] = {
 		if ( creepInfo and creepInfo.family ) then
 			oldFamily = creepInfo.family
 		end
-		KillLog_ListFrame_ChangeCreepFamily(KillLog_ListFrame.dropDownMenuID, getglobal(self:GetParent():GetName().."EditBox"):GetText(), oldFamily);
+		KillLog_ListFrame_ChangeCreepFamily(KillLog_ListFrame.dropDownMenuID, _G[self:GetParent():GetName().."EditBox"]:GetText(), oldFamily);
 	end,
 	EditBoxOnEnterPressed = function(self)
-		--KillLog_ListFrame_ChangeCreepFamily(KillLog_ListFrame.dropDownMenuID, getglobal(self:GetParent():GetName().."EditBox"):GetText());
+		--KillLog_ListFrame_ChangeCreepFamily(KillLog_ListFrame.dropDownMenuID, _G[self:GetParent():GetName().."EditBox"]:GetText());
 	end,
 	OnShow = function(self)
-		local editBox = getglobal(self:GetName().."EditBox");
+		local editBox = _G[self:GetName().."EditBox"];
 		editBox:SetFocus();
 		local creepData = KillLog_ListFrame_GetCreepName(KillLog_ListFrame.dropDownMenuID);
 		local creepInfo = KillLog_CreepInfo[creepData.name];
@@ -76,7 +76,7 @@ StaticPopupDialogs["KILLLOG_LIST_CHANGE_FAMILY"] = {
 		if ( ChatFrameEditBox:IsVisible() ) then
 			ChatFrameEditBox:SetFocus();
 		end
-		getglobal(self:GetName().."EditBox"):SetText("");
+		_G[self:GetName().."EditBox"]:SetText("");
 	end,
 	timeout = 0,
 	exclusive = 1,
@@ -128,10 +128,10 @@ function KillLog_ListFrame_Update()
 	local creepID, creepTitle, creepTitleTag, creepHighlight, creepNormalText, creepHighlightText, creepDisabledText, creepData, color, creepInfo, order, tag;
 	for index=1, KILLLOG_LIST_CREEPS_DISPLAYED, 1 do
 		creepID            = index + scrollFrameOffset;
-		creepTitle         = getglobal("KillLog_List_Title"..index);
-		creepCreep		   = getglobal("KillLog_List_Title"..index.."Creep");
-		creepTitleTag      = getglobal("KillLog_List_Title"..index.."Tag");
-		creepHighlight     = getglobal("KillLog_List_Title"..index.."Highlight");
+		creepTitle         = _G["KillLog_List_Title"..index];
+		creepCreep		   = _G["KillLog_List_Title"..index.."Creep"];
+		creepTitleTag      = _G["KillLog_List_Title"..index.."Tag"];
+		creepHighlight     = _G["KillLog_List_Title"..index.."Highlight"];
 		
 		if ( creepID > numEntries ) then
 			creepTitle:Hide();
@@ -266,10 +266,10 @@ function KillLog_ListFrame_SetSelection(creepID)
 		-- Set newly selected creep and highlight it
 		KillLog_ListFrame.selectedCreepID = creepID;
 		if ( creepID > scrollFrameOffset and creepID <= (scrollFrameOffset + KILLLOG_LIST_CREEPS_DISPLAYED) and creepID <= KillLog_ListFrame_GetNumCreepEntries() ) then
-			local titleButton = getglobal("KillLog_List_Title"..id);
+			local titleButton = _G["KillLog_List_Title"..id];
 			titleButton:LockHighlight();
-			getglobal("KillLog_List_Title"..id.."Tag"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
-			getglobal("KillLog_List_Title"..id.."Creep"):SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+			_G["KillLog_List_Title"..id.."Tag"]:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+			_G["KillLog_List_Title"..id.."Creep"]:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 			KillLog_List_CreepHighlight:SetVertexColor(titleButton.r, titleButton.g, titleButton.b);
 			KillLog_List_HighlightFrame:SetPoint("TOPLEFT", "KillLog_List_Title"..id, "TOPLEFT", 5, 0);
 			KillLog_List_HighlightFrame:Show();
@@ -289,8 +289,8 @@ function KillLog_ListFrame_UpdateCreepDetails()
 	end
 
 	if ( creepData.portrait and KillLog_ListDetailFrame.portrait ~= creepData.portrait ) then
-		getglobal("KillLog_ListFrame_CreepPortrait"..KillLog_ListDetailFrame.portrait):Hide();
-		getglobal("KillLog_ListFrame_CreepPortrait"..creepData.portrait):Show();
+		_G["KillLog_ListFrame_CreepPortrait"..KillLog_ListDetailFrame.portrait]:Hide();
+		_G["KillLog_ListFrame_CreepPortrait"..creepData.portrait]:Show();
 		KillLog_ListDetailFrame.portrait = creepData.portrait;
 	end
 
@@ -693,7 +693,7 @@ function KillLog_ListFrame_Tab_OnClick(self)
 		return;
 	end
 
-	PanelTemplates_DeselectTab(getglobal("KillLog_ListFrame_ToggleTab"..KillLog_ListFrame.selectedTab));
+	PanelTemplates_DeselectTab(_G["KillLog_ListFrame_ToggleTab"..KillLog_ListFrame.selectedTab]);
 	PanelTemplates_SelectTab(self);
 	KillLog_ListFrame.selectedTab = tabID;
 

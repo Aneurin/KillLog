@@ -24,7 +24,7 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 			</OnClick>
 			<OnShow>
 				PanelTemplates_TabResize(self, 10);
-				getglobal(self:GetName().."HighlightTexture"):SetWidth(self:GetTextWidth() + 30);
+				_G[self:GetName().."HighlightTexture"]:SetWidth(self:GetTextWidth() + 30);
 			</OnShow>
 		</Scripts>
 	</Button>

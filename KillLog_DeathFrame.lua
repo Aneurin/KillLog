@@ -66,14 +66,14 @@ function KillLog_DeathFrame_Update()
 	local scrollFrameOffset = FauxScrollFrame_GetOffset(KillLog_DeathScrollFrame);
 	local deathTitle,deathText
 	if ( not KillLog_AllCharacterData or not KillLog_AllCharacterData["death"] or table.getn(KillLog_AllCharacterData["death"]) == 0 ) then
-		deathTitle = getglobal("KillLog_DeathButtonTitleText");
+		deathTitle = _G["KillLog_DeathButtonTitleText"];
 		deathTitle:SetText("Death History");
 		
-		deathText = getglobal("KillLog_DeathButton1Text");
+		deathText = _G["KillLog_DeathButton1Text"];
 		deathText:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 		deathText:SetText("    "..KILLLOG_NOT_AVAILABLE);
 	else	
-		deathTitle = getglobal("KillLog_DeathButtonTitleText");
+		deathTitle = _G["KillLog_DeathButtonTitleText"];
 		deathTitle:SetText("Death History");
 		
         if ( numEntries < 10 ) then
@@ -94,7 +94,7 @@ function KillLog_DeathFrame_Update()
 			local deathLevel = KillLog_CharacterData[realm][player]["death"][creepIndex].level
 			local deathTime = KillLog_CharacterData[realm][player]["death"][creepIndex].time
 			
-			deathText = getglobal("KillLog_DeathButton"..index.."Text");
+			deathText = _G["KillLog_DeathButton"..index.."Text"];
 			
 			deathText:SetTextColor(KILLLOG_TEXT_COLOR.r, KILLLOG_TEXT_COLOR.g, KILLLOG_TEXT_COLOR.b);
 			if(creepIndex < 10) then

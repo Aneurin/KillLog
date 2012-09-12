@@ -58,8 +58,8 @@ function KillLog_OptionsFrame_Load()
 	for index, value in pairs(KillLog_OptionsFrameCheckButtons) do
 		DebugMessage("KL - Options", "CheckButton"..value.index.." - "..value.setting, "info");
 		
-		button = getglobal("KillLog_OptionsFrameCheckButton"..value.index);
-		string = getglobal("KillLog_OptionsFrameCheckButton"..value.index.."Text");
+		button = _G["KillLog_OptionsFrameCheckButton"..value.index];
+		string = _G["KillLog_OptionsFrameCheckButton"..value.index.."Text"];
 		if ( KillLog_Options[value.setting] ) then
 			checked = 1;
 			setting = setting..value.setting..": true, ";
@@ -80,7 +80,7 @@ function KillLog_OptionsFrame_Load()
 			button:SetChecked(checked);
 		end
 
-		string:SetText(getglobal(index));
+		string:SetText(_G[index]);
 		button.tooltipText  = value.tooltipText;
 	end
 
@@ -88,8 +88,8 @@ function KillLog_OptionsFrame_Load()
 	for index, value in pairs(KillLog_OptionsFrameSliders) do
 		DebugMessage("KL - Option", "Slider"..index.." - "..value.setting, "info");
 		
-		slider       = getglobal("KillLog_OptionsFrameSlider"..index);
-		string       = getglobal("KillLog_OptionsFrameSlider"..index.."Text");
+		slider       = _G["KillLog_OptionsFrameSlider"..index];
+		string       = _G["KillLog_OptionsFrameSlider"..index.."Text"];
 		getvalue     = KillLog_Options[value.setting];
 
 		slider.disabled = nil;
@@ -128,7 +128,7 @@ function KillLog_OptionsFrame_Save()
 	local setting = "";
 	local index, value, button, string, checked;
 	for index, value in pairs(KillLog_OptionsFrameCheckButtons) do
-		button = getglobal("KillLog_OptionsFrameCheckButton"..value.index);
+		button = _G["KillLog_OptionsFrameCheckButton"..value.index];
 		if ( not button:GetChecked() ) then
 			setting = setting..value.setting..": nil, ";
 			KillLog_Options[value.setting] = nil;
@@ -138,7 +138,7 @@ function KillLog_OptionsFrame_Save()
 		end
 	end
 	for index, value in pairs(KillLog_OptionsFrameSliders) do
-		local slider = getglobal("KillLog_OptionsFrameSlider"..index);
+		local slider = _G["KillLog_OptionsFrameSlider"..index];
 		if ( KillLog_Options[value.setting] ) then
 			setting = setting..value.setting..": "..slider:GetValue()..", ";
 			KillLog_Options[value.setting] = slider:GetValue();
@@ -155,7 +155,7 @@ end
 function KillLog_OptionsFrame_UpdateMaxOptions(storeChecked)
 	local index = "KILLLOG_OPTION_NOTIFY_MAX";
 	local value = KillLog_OptionsFrameCheckButtons[index];
-	local button = getglobal("KillLog_OptionsFrameCheckButton"..value.index);
+	local button = _G["KillLog_OptionsFrameCheckButton"..value.index];
 	local checked = nil;
 	if ( KillLog_Options[value.setting] ) then
 		checked = 1;
@@ -177,7 +177,7 @@ end
 function KillLog_OptionsFrame_UpdateStoreCreepOptions(storeChecked)
 	local index = "KILLLOG_OPTION_STORE_LOCATION";
 	local value = KillLog_OptionsFrameCheckButtons[index];
-	local button = getglobal("KillLog_OptionsFrameCheckButton"..value.index);
+	local button = _G["KillLog_OptionsFrameCheckButton"..value.index];
 	local checked = nil;
 	if ( KillLog_Options[value.setting] ) then
 		checked = 1;

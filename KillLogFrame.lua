@@ -202,13 +202,13 @@ function ToggleKillLog(tab)
 			HideUIPanel(KillLogFrame);
 		else
 			ShowUIPanel(KillLogFrame);
-			local selectedFrame = getglobal(KILLLOG_TAB_SUBFRAMES[KillLogFrame.selectedTab]);
+			local selectedFrame = _G[KILLLOG_TAB_SUBFRAMES[KillLogFrame.selectedTab]];
 			if ( not selectedFrame:IsVisible() ) then
 				selectedFrame:Show()
 			end
 		end
 	else
-		local subFrame = getglobal(tab);
+		local subFrame = _G[tab];
 		if ( subFrame ) then
 			PanelTemplates_SetTab(KillLogFrame, subFrame:GetID());
 			if ( KillLogFrame:IsVisible() ) then
@@ -229,9 +229,9 @@ end
 function KillLogFrame_ShowSubFrame(frameName)
 	for index, value in pairs(KILLLOG_TAB_SUBFRAMES) do
 		if ( value == frameName ) then
-			getglobal(value):Show();
+			_G[value]:Show();
 		else
-			getglobal(value):Hide();
+			_G[value]:Hide();
 		end
 	end
 end
@@ -446,7 +446,7 @@ function KillLog_FreeMemory()
 		KillLog_CreepPortraitID = KILL_LOG_MAX_PORTRAITS;
 		local index;
 		for index=1, KILL_LOG_MAX_PORTRAITS, 1 do
-			local portrait = getglobal("KillLog_ListFrame_CreepPortrait"..index);
+			local portrait = _G["KillLog_ListFrame_CreepPortrait"..index];
 			portrait = nil;
 		end
 	elseif ( KillLog_SessionData ) then
@@ -883,7 +883,7 @@ function KillLogFrame_RecordCreepInfo(unit)
 
 	if ( KillLog_Options.portrait and KillLog_CreepPortrait ) then
 		if ( not KillLog_CreepPortrait[creepName] and KillLog_CreepPortraitID <= KillLog_Options.portrait ) then
-			local portrait = getglobal("KillLog_ListFrame_CreepPortrait"..KillLog_CreepPortraitID);
+			local portrait = _G["KillLog_ListFrame_CreepPortrait"..KillLog_CreepPortraitID];
 			if ( portrait ) then
 				DebugMessage("KL", "Portrait["..KillLog_CreepPortraitID.."]: for "..creepName, "helper");
 				SetPortraitTexture(portrait, unit);
@@ -1103,7 +1103,7 @@ function KillLog_Tooltip(creepName)
 			GameTooltip:SetHeight(GameTooltip:GetHeight() + (14 * linesAdded));
 			local tooltipLineCount = GameTooltip:NumLines();
 			for i=(tooltipLineCount-linesAdded+1), tooltipLineCount, 1 do
-				width = 20 + getglobal(GameTooltip:GetName().."TextLeft"..i):GetWidth();
+				width = 20 + _G[GameTooltip:GetName().."TextLeft"..i]:GetWidth();
 				if ( GameTooltip:GetWidth() < width ) then
 					GameTooltip:SetWidth(width);
 				end

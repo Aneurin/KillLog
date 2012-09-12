@@ -25,11 +25,11 @@ function KillLog_GeneralFrame_OnLoad()
 		color = MATERIAL_TEXT_COLOR_TABLE.Parchment;
 		local index;
 		for index=1, KILLLOG_MAXHIT_COUNT, 1 do
-			getglobal("KillLog_GeneralFrameHit"..index):SetTextColor(color[1], color[2], color[3]);
+			_G["KillLog_GeneralFrameHit"..index]:SetTextColor(color[1], color[2], color[3]);
 		end
 		for index=1, KILLLOG_MAXHIT_COUNT-3, 1 do
-			getglobal("KillLog_GeneralFrameXp"..index):SetTextColor(color[1], color[2], color[3]);
-			getglobal("KillLog_GeneralFrameCreep"..index):SetTextColor(color[1], color[2], color[3]);
+			_G["KillLog_GeneralFrameXp"..index]:SetTextColor(color[1], color[2], color[3]);
+			_G["KillLog_GeneralFrameCreep"..index]:SetTextColor(color[1], color[2], color[3]);
 		end
 	end
 end
@@ -56,7 +56,7 @@ function KillLog_GeneralFrame_OnShow()
 	else
 		QuickSort(maxHitList, function(a,b) if (a.value ~= b.value) then return a.value > b.value; end return a.name < b.name; end);
 		for index=1, KILLLOG_MAXHIT_COUNT, 1 do
-			fontString = getglobal("KillLog_GeneralFrameHit"..index);
+			fontString = _G["KillLog_GeneralFrameHit"..index];
 			if ( maxHitList[index] ) then
 				fontString:SetText("    "..maxHitList[index].name..": "..maxHitList[index].value);
 				fontString:Show();
@@ -128,7 +128,7 @@ function KillLog_GeneralFrame_OnShow()
 	else
 		QuickSort(xpList, function(a,b) if (a.value ~= b.value) then return a.value > b.value; end return a.name < b.name; end);
 		for index=1, KILLLOG_MAXHIT_COUNT, 1 do
-			fontString = getglobal("KillLog_GeneralFrameXp"..index);
+			fontString = _G["KillLog_GeneralFrameXp"..index];
 			if ( xpList[index] ) then
 				fontString:SetText("    "..xpList[index].name..": "..xpList[index].value);
 				fontString:Show();
@@ -219,7 +219,7 @@ function KillLog_GeneralFrame_OnShow()
 	else
 		--QuickSort(creepList, function(a,b) if (a.value ~= b.value) then return a.value > b.value; end return a.name < b.name; end);
 		for index = 1, KILLLOG_MAXHIT_COUNT, 1 do
-			fontString = getglobal("KillLog_GeneralFrameCreep"..index);
+			fontString = _G["KillLog_GeneralFrameCreep"..index];
 			if ( creepList[index] ) then
 				fontString:SetText("    "..creepList[index].name..": "..creepList[index].value);
 				fontString:Show();

@@ -52,19 +52,19 @@ list frame: a listing of the creeps you have fought
 		</Layers>
 		<Scripts>
 			<OnLoad>
-				getglobal(self:GetName().."Text"):SetText("SCT Color");
+				_G[self:GetName().."Text"]:SetText("SCT Color");
 			</OnLoad>
 			<OnClick>
 				KillLog_OpenColorPicker();
 			</OnClick>
 			<OnEnter>
-				getglobal(self:GetName().."SwatchBg"):SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
+				_G[self:GetName().."SwatchBg"]:SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
 			</OnEnter>
 			<OnLeave>
 				if (KillLog_Options.color) then
-					getglobal(self:GetName().."SwatchBg"):SetVertexColor(KillLog_Options.color.r, KillLog_Options.color.g, KillLog_Options.color.b);
+					_G[self:GetName().."SwatchBg"]:SetVertexColor(KillLog_Options.color.r, KillLog_Options.color.g, KillLog_Options.color.b);
 				else
-					getglobal(self:GetName().."SwatchBg"):SetVertexColor( 0.0, 0.0, 0.0 );
+					_G[self:GetName().."SwatchBg"]:SetVertexColor( 0.0, 0.0, 0.0 );
 				end
 			</OnLeave>
 			<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\ChatFrameColorSwatch"/>
