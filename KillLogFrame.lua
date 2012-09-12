@@ -113,15 +113,11 @@ function KillLogLoadingFrame_OnLoad(self)
 		DEFAULT_CHAT_FRAME:AddMessage(loadingTitle);
 	end
 	
-	KillLogLoadingFrame:RegisterEvent("VARIABLES_LOADED");
-	KillLogLoadingFrame:RegisterEvent("UNIT_NAME_UPDATE");
+	KillLogLoadingFrame:RegisterEvent("ADDON_LOADED");
 	KillLogLoadingFrame:RegisterEvent("PLAYER_ENTER_COMBAT");
 	KillLogLoadingFrame:RegisterEvent("PLAYER_LEAVE_COMBAT");
 	KillLogLoadingFrame:RegisterEvent("PLAYER_REGEN_DISABLED");
 	KillLogLoadingFrame:RegisterEvent("PLAYER_REGEN_ENABLED");
-	KillLogLoadingFrame:RegisterEvent("PLAYER_ENTERING_WORLD");
-	KillLogLoadingFrame.init = 0;
-	KillLogLoadingFrame.checkLoaded = GetTime() + 10;
 end
 
 function KillLogLoadingFrame_OnEvent(self,event,...)
@@ -132,12 +128,9 @@ function KillLogLoadingFrame_OnEvent(self,event,...)
 		KillLogLoadingFrame.combatEnded = GetTime() + 5;
 		KillLogLoadingFrame:Show();
 		DebugMessage("KL", event.." <<< combat", "helper");
-	elseif ( event == "VARIABLES_LOADED" or event == "UNIT_NAME_UPDATE" ) then
-		--DebugMessage("KL", "DebugLevel "..KillLog_Options.debugLevel, "helper");
-		KillLogLoadingFrame.init = KillLogLoadingFrame.init + 1;
-		if ( KillLogLoadingFrame.init >= 1 ) then
-			KillLogFrame_LoadData();
-		end
+	elseif ( event == "ADDON_LOADED" and ... == "KillLog" ) then
+		KillLogFrame_LoadData();
+		KillLogLoadingFrame:UnregisterEvent("ADDON_LOADED")
 	end
 end
 
@@ -147,26 +140,6 @@ function KillLogLoadingFrame_OnUpdate(self,elapsed)
 		if ( KillLogLoadingFrame.combatEnded < GetTime() ) then
 			KillLogFrame.lastHitOtherToSelf = nil;
 			KillLogLoadingFrame.combatEnded = nil;
-		end
-	elseif ( KillLogLoadingFrame.checkLoaded ) then
-		if ( KillLogFrame.loaded ) then
-			KillLogLoadingFrame:UnregisterEvent("VARIABLES_LOADED");
-			KillLogLoadingFrame:UnregisterEvent("UNIT_NAME_UPDATE");
-		end
-
-		--sanity check; ensure that we are loaded and have the actual character name
-		if ( KillLogLoadingFrame.checkLoaded <= GetTime() ) then
-			if ( KillLogFrame.loaded == UnitName("player") ) then
-				KillLogLoadingFrame.init = nil;
-				KillLogLoadingFrame.checkLoaded = nil;
-				KillLogLoadingFrame:Hide();
-			else
-				if ( KillLogFrame.loaded ) then
-					DebugMessage("KL", "Data initialized for "..KillLogFrame.loaded.." instead of the actual character!  This has been corrected, but Frenn should be notified to prevent this from happening again.", "error");
-				end
-				KillLogFrame_LoadData();
-				KillLogLoadingFrame.checkLoaded = GetTime() + 10;
-			end
 		end
 	else
 		KillLogLoadingFrame:Hide();
