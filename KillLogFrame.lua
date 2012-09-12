@@ -124,24 +124,6 @@ function KillLogLoadingFrame_OnLoad(self)
 	KillLogLoadingFrame.checkLoaded = GetTime() + 10;
 end
 
-function KillLogLoadingFrame_OnEvent(event)
-	if ( event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_REGEN_DISABLED" ) then
-		KillLogLoadingFrame.combatEnded = nil;
-		DebugMessage("KL", event.." >>> combat", "helper");
-	elseif ( event == "PLAYER_LEAVE_COMBAT" or event == "PLAYER_REGEN_ENABLED" ) then
-		KillLogLoadingFrame.combatEnded = GetTime() + 5;
-		KillLogLoadingFrame:Show();
-		DebugMessage("KL", event.." <<< combat", "helper");
-	elseif ( event == "VARIABLES_LOADED" or event == "UNIT_NAME_UPDATE" ) then
-		--DebugMessage("KL", "DebugLevel "..KillLog_Options.debugLevel, "helper");
-		KillLogLoadingFrame.init = KillLogLoadingFrame.init + 1;
-		if ( KillLogLoadingFrame.init >= 1 ) then
-			KillLogFrame_LoadData();
-		end
-	end
-end
-
-
 function KillLogLoadingFrame_OnEvent(self,event,...)
 	if ( event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_REGEN_DISABLED" ) then
 		KillLogLoadingFrame.combatEnded = nil;
@@ -265,8 +247,6 @@ function KillLogFrame_OnLoad(self)
 	
 	self.loaded = nil;
 	self.init   = 0;
-	-- this will only be filled with creeps that we do not expect experience for
-	-- that way, when we see a creep die we can count it as a kill if it's name is filled
 	self.lastHitOtherToSelf = nil;
 end
 
@@ -815,34 +795,6 @@ function KillLogFrame_RecordCreepInfo(unit)
 				local tempX = math.floor(100.0 * mapX);
 				local tempY = math.floor(100.0 * mapY);
 
-				--[[if ( not creepInfo.x or not creepInfo.maxX ) then
-					DebugMessage("KL", "new X coords: "..creepName..", ("..tempX..", "..tempX..")", "info");
-					creepInfo.x         = tempX;
-					creepInfo.maxX		= tempX;
-				end
-				if ( creepInfo.x > tempX ) then
-					DebugMessage("KL", "new minX: "..creepName..", "..tempX.." - "..creepInfo.maxX, "info");
-					creepInfo.x = tempX;
-				end
-				if ( creepInfo.maxX < tempX ) then
-					DebugMessage("KL", "new maxX: "..creepName..", "..creepInfo.x.." - "..tempX, "info");
-					creepInfo.maxX = tempX;
-				end
-				
-				if ( not creepInfo.y or not creepInfo.maxY ) then
-					DebugMessage("KL", "new Y coords: "..creepName..", ("..tempY..", "..tempY..")", "info");
-					creepInfo.y         = tempY;
-					creepInfo.maxY		= tempY;
-				end
-				if ( creepInfo.y > tempY ) then
-					DebugMessage("KL", "new minY: "..creepName..", "..tempY.." - "..creepInfo.maxY, "info");
-					creepInfo.y = tempY;
-				end
-				if ( creepInfo.maxY < tempY ) then
-					DebugMessage("KL", "new maxY: "..creepName..", "..creepInfo.y.." - "..tempY, "info");
-					creepInfo.maxY = tempY;
-				end]]
-				
 				local minX, maxX, minY, maxY;
 				
 				if ( not creepInfo.loc ) then

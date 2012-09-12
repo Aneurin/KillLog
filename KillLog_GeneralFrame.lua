@@ -10,7 +10,6 @@ general frame: Listing of interesting statistics
 ]]
 
 local KILLLOG_MAXHIT_COUNT = 18;
-KILLLOG_GENERAL_NUMBER = 25;
 local xpTotal = 0;
 
 function KillLog_GeneralFrame_OnLoad()
