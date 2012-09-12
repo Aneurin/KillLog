@@ -103,7 +103,7 @@ function DebugMessage(x,y,z)
 	end
 end
 
-function KillLogLoadingFrame_OnLoad()
+function KillLogLoadingFrame_OnLoad(self)
 	if ( Cosmos_RegisterButton ) then
 		Cosmos_RegisterButton(KILLLOG_BUTTON_TEXT, KILLLOG_BUTTON_SUBTEXT, KILLLOG_BUTTON_TIP, "Interface\\Icons\\Ability_Warrior_Sunder", ToggleKillLog);
 	end
@@ -142,7 +142,7 @@ function KillLogLoadingFrame_OnEvent(event)
 end
 
 
-function KillLogLoadingFrame_OnEvent(event)
+function KillLogLoadingFrame_OnEvent(self,event,...)
 	if ( event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_REGEN_DISABLED" ) then
 		KillLogLoadingFrame.combatEnded = nil;
 		DebugMessage("KL", event.." >>> combat", "helper");
@@ -160,7 +160,7 @@ function KillLogLoadingFrame_OnEvent(event)
 end
 
 
-function KillLogLoadingFrame_OnUpdate()
+function KillLogLoadingFrame_OnUpdate(self,elapsed)
 	if ( KillLogLoadingFrame.combatEnded ) then
 		if ( KillLogLoadingFrame.combatEnded < GetTime() ) then
 			KillLogFrame.lastHitOtherToSelf = nil;

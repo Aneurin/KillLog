@@ -653,7 +653,7 @@ function KillLog_ListTitleButton_OnClick(self, button)
 	end
 end
 
-function KillLog_ListDetailFrame_OnClick(button)
+function KillLog_ListDetailFrame_OnClick(self,button)
 	if ( button == "RightButton" ) then
 		KillLog_ListFrame.dropDownMenuID = KillLog_ListFrame.selectedCreepID;
 		ToggleDropDownMenu(1, nil, KillLog_List_TitleDropDown, "KillLog_ListDetailFrame", 10, 0);

@@ -850,7 +850,7 @@ list frame: a listing of the creeps you have fought
 						self.portrait = "Default";
 					</OnLoad>
 					<OnClick>
-						KillLog_ListDetailFrame_OnClick();
+						KillLog_ListDetailFrame_OnClick(self,button);
 					</OnClick>
 				</Scripts>
 			</Frame>
