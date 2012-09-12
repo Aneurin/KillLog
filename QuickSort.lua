@@ -44,6 +44,7 @@ function QuickSort(array, comp, low, high)
 		end
 	end
 	-- Only 2 values ... swap if necesary
+	local pivot
 	if low + 1 == high then
 		if comp(array[high], array[low]) then
 			array[high], array[low] = array[low], array[high];

@@ -9,8 +9,8 @@ updated: Thurs, 04 Jan 2007 15:30:00
 death frame: Listing of your deaths
 ]]
 KILLLOG_DEATH_TITLEBUTTON_HEIGHT = 30;
-KILLLOG_NUM_DISPLAY = 10;
-KILLLOG_TEXT_COLOR = { r = 1, g = 1, b = 1 };
+local KILLLOG_NUM_DISPLAY = 10;
+local KILLLOG_TEXT_COLOR = { r = 1, g = 1, b = 1 };
 
 function KillLog_DeathFrame_OnShow()
 	KillLog_DeathFrame_Update()
@@ -64,7 +64,7 @@ function KillLog_DeathFrame_Update()
 	-- Update scroll frame
 	FauxScrollFrame_Update(KillLog_DeathScrollFrame, numEntries, KILLLOG_NUM_DISPLAY, KILLLOG_DEATH_TITLEBUTTON_HEIGHT, nil, nil, nil, KillLog_DeathFrame_HighlightFrame, 293, 316);
 	local scrollFrameOffset = FauxScrollFrame_GetOffset(KillLog_DeathScrollFrame);
-	
+	local deathTitle,deathText
 	if ( not KillLog_AllCharacterData or not KillLog_AllCharacterData["death"] or table.getn(KillLog_AllCharacterData["death"]) == 0 ) then
 		deathTitle = getglobal("KillLog_DeathButtonTitleText");
 		deathTitle:SetText("Death History");

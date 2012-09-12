@@ -10,11 +10,11 @@ list frame: a listing of the creeps you have fought
 ]]
 
 KILLLOG_LIST_TITLEBUTTON_HEIGHT = 15;
-KILLLOG_LIST_CREEPS_DISPLAYED   = 12;
+local KILLLOG_LIST_CREEPS_DISPLAYED   = 12;
 KILLLOG_LIST_MAX_PORTRAITS      = 99;
 -- this is used so that the tab (level XX) is the correct width
 KILLLOG_LIST_LEVEL_XX           = KILLLOG_LIST_LEVEL..UnitLevel("player");
-tabID							= 1;
+local tabID							= 1;
 
 -- define Static Popup windows
 StaticPopupDialogs["KILLLOG_LIST_CHANGE_TYPE"] = {

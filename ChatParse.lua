@@ -65,7 +65,7 @@ function ChatParse_OnEvent(self, event, message)
 			if ( not info.AddOn or not processed[info.AddOn] ) then
 				match = ChatParse_MatchPattern(message, info.patternSpec);
 				if ( match ) then
-					result = info.func(match);
+					local result = info.func(match);
 					if ( not result and info.AddOn ) then
 						processed[info.AddOn] = true;
 					end

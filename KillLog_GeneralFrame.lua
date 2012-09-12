@@ -9,10 +9,9 @@ updated: Thurs, 2 Feb 2007
 general frame: Listing of interesting statistics
 ]]
 
-KILLLOG_MAXHIT_COUNT = 18;
+local KILLLOG_MAXHIT_COUNT = 18;
 KILLLOG_GENERAL_NUMBER = 25;
-temp = 0;
-xpTotal = 0;
+local xpTotal = 0;
 
 function KillLog_GeneralFrame_OnLoad()
 	local color;
@@ -149,7 +148,7 @@ function KillLog_GeneralFrame_OnShow()
 	for creepName, data in pairs(KillLog_AllCharacterData["overall"]) do
 		if ( data.kill ) then
 			if ( KillLog_CreepInfo and KillLog_CreepInfo[creepName] ) then
-				classCheck = KillLog_CreepInfo[creepName].class;
+				local classCheck = KillLog_CreepInfo[creepName].class;
 				totalKill = totalKill + data.kill;
 				if ( KillLog_CreepInfo and classCheck ~= "rare" and classCheck ~= "elite" and classCheck ~= "rareelite" and classCheck ~= "worldboss" ) then
 					normalKill = normalKill + data.kill;
@@ -171,7 +170,7 @@ function KillLog_GeneralFrame_OnShow()
 		
 		if ( data.death ) then
 			if ( KillLog_CreepInfo and KillLog_CreepInfo[creepName] ) then
-				classCheck = KillLog_CreepInfo[creepName].class;
+				local classCheck = KillLog_CreepInfo[creepName].class;
 				totalDeath = totalDeath + data.death;
 				if ( KillLog_CreepInfo and classCheck ~= "rare" and classCheck ~= "elite" and classCheck ~= "rareelite" and classCheck ~= "worldboss" ) then
 					normalDeath = normalDeath + data.death;
@@ -227,14 +226,14 @@ function KillLog_GeneralFrame_OnShow()
 			end
 		end
 	end
-	
+	local hitList
 	if ( table.getn(maxHitList) > 18 ) then
 		hitList = 18
 	else	
 		hitList = table.getn(maxHitList)
 	end
 	
-	temp = table.getn(creepList) + table.getn(xpList) + hitList
+	local temp = table.getn(creepList) + table.getn(xpList) + hitList
 	
 	DebugMessage("KL", "temp: "..temp, "info");
 	DebugMessage("KL", "maxHitList: "..hitList.." xpList: "..table.getn(xpList).." creepList: "..table.getn(creepList), "info");

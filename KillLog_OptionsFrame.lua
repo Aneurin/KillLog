@@ -138,7 +138,7 @@ function KillLog_OptionsFrame_Save()
 		end
 	end
 	for index, value in pairs(KillLog_OptionsFrameSliders) do
-		slider = getglobal("KillLog_OptionsFrameSlider"..index);
+		local slider = getglobal("KillLog_OptionsFrameSlider"..index);
 		if ( KillLog_Options[value.setting] ) then
 			setting = setting..value.setting..": "..slider:GetValue()..", ";
 			KillLog_Options[value.setting] = slider:GetValue();

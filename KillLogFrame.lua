@@ -14,7 +14,7 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 ---------------
 
 KILLLOG_VERSION = GetAddOnMetadata('KillLog', 'Version');
-KILLLOG_DATA_VERSION = 11;
+local KILLLOG_DATA_VERSION = 11;
 
 local titleGreen 		= "|CFF00FF00";
 local titleYellow 		= "|CFFFFFF00";
@@ -277,7 +277,7 @@ function KillLogFrame_Slash(msg)
 	local args = { n = 0 }
 	local function helper(word) table.insert(args, word) end
 	string.gsub(msg, "[_%w]+", helper);
-	argSize = table.maxn(args)
+	local argSize = table.maxn(args)
 	DebugMessage("KL", msg, "helper");
 	DebugMessage("KL", "args size "..argSize, "helper");
 	
@@ -287,7 +287,7 @@ function KillLogFrame_Slash(msg)
 		if args[2] == nil then
 			DEFAULT_CHAT_FRAME:AddMessage("|cffffff00".."Debug Level currently set at "..KillLog_Options.debugLevel.."|r");
 		else
-			argNumber = tonumber(args[2])
+			local argNumber = tonumber(args[2])
 			if ( argNumber < 0 or argNumber > 5 ) then
 				DEFAULT_CHAT_FRAME:AddMessage("Please use a value between 0 & 5 ",1,0,0);
 			else
@@ -340,7 +340,7 @@ function KillLogFrame_Slash(msg)
 		if args[2] == nil then
 			DebugMessage("KL", "Please enter a number.", "error");
 		else
-			argNumber = tonumber(args[2])
+			local argNumber = tonumber(args[2])
 			KillLog_Options.dataVersion = argNumber
 			DebugMessage("KL", "Data Version reset to "..argNumber, "info");
 		end
@@ -811,9 +811,9 @@ function KillLogFrame_RecordCreepInfo(unit)
 				if ( GetCurrentMapContinent() ~= mapData.continent or GetCurrentMapZone() ~= mapData.zone ) then
 					SetMapZoom(mapData.continent, mapData.zone);
 				end
-				local mapX, mapY    = GetPlayerMapPosition("player");
-				tempX         		= math.floor(100.0 * mapX);
-				tempY         		= math.floor(100.0 * mapY);
+				local mapX, mapY = GetPlayerMapPosition("player");
+				local tempX = math.floor(100.0 * mapX);
+				local tempY = math.floor(100.0 * mapY);
 
 				--[[if ( not creepInfo.x or not creepInfo.maxX ) then
 					DebugMessage("KL", "new X coords: "..creepName..", ("..tempX..", "..tempX..")", "info");
@@ -852,9 +852,9 @@ function KillLogFrame_RecordCreepInfo(unit)
 					DebugMessage("KL", "Checking coords: "..creepName, "info");
 					local newMinX, newMaxX, newMinY, newMaxY
 					
-					breakPoint = string.find(creepInfo.loc,"/")
-					minMidPoint = string.find(creepInfo.loc,"-")
-					maxMidPoint = string.find(creepInfo.loc,"-",breakPoint)
+					local breakPoint = string.find(creepInfo.loc,"/")
+					local minMidPoint = string.find(creepInfo.loc,"-")
+					local maxMidPoint = string.find(creepInfo.loc,"-",breakPoint)
 					
 					minX = tonumber(string.sub(creepInfo.loc, 1, minMidPoint - 1))
 					maxX = tonumber(string.sub(creepInfo.loc, breakPoint + 1, maxMidPoint - 1))
@@ -911,11 +911,11 @@ function KillLogFrame_CheckMaxDamage(attackName, attackType, attackDamage, damag
 					DebugMessage("KL", "Message sent via UIErrorsFrame", "helper")
 				else
 					if ( not KillLog_Options.color ) then
-						SCT_Color = {r = 1.0, g = 1.0, b = 1.0}
+						local SCT_Color = {r = 1.0, g = 1.0, b = 1.0}
 						SCT:DisplayCustomEvent(format(KILLLOG_NEW_MAX, attackName, attackType, attackDamage), SCT_Color, 0, 1);
 						DebugMessage("KL", "Message sent via SCT using default colors", "helper")
 					else
-						SCT_Color = {r = KillLog_Options.color.r, g = KillLog_Options.color.g, b = KillLog_Options.color.b}
+						local SCT_Color = {r = KillLog_Options.color.r, g = KillLog_Options.color.g, b = KillLog_Options.color.b}
 						SCT:DisplayCustomEvent(format(KILLLOG_NEW_MAX, attackName, attackType, attackDamage), SCT_Color, 0, 1);
 						DebugMessage("KL", "Message sent via SCT using custom colors", "helper")
 					end
