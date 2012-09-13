@@ -354,8 +354,6 @@ function KillLogFrame_OnEvent(event)
 		if ( UnitExists("mouseover") and not UnitPlayerControlled("mouseover") and KillLog_Options.tooltip ) then
 			KillLog_Tooltip();
 		end
-	elseif ( event == "PLAYER_XP_UPDATE" ) then
-		DebugMessage("KL", "event: "..event, "function");
 	elseif ( event == "UNIT_LEVEL" ) then
 		local characterLevel = UnitLevel("player");
 		if ( not KillLog_ListFrame:IsVisible() ) then
@@ -505,7 +503,6 @@ function KillLogFrame_LoadData()
 	if ( KillLog_Options.storeCreep ) then
 		KillLogFrame:RegisterEvent("PLAYER_TARGET_CHANGED");
 		KillLogFrame:RegisterEvent("UPDATE_MOUSEOVER_UNIT");
-		KillLogFrame:RegisterEvent("PLAYER_XP_UPDATE");
 
 		local continents = { GetMapContinents() };
 		local continent, junk, zones, zone, name;
