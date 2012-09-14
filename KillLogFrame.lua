@@ -618,19 +618,29 @@ function KillLogFrame_LoadData()
 	CombatParse_RegisterEvent(chatParseInfo);
 	
 --#Endregion
+	chatParseInfo.event		= "ENVIRONMENTAL_DAMAGE";
+	chatParseInfo.func		= function(t)
+		if t.dstFlags == COMBATLOG_OBJECT_SELF then
+			KillLogFrame.lastHitOtherToSelf = nil;
+			KillLogFrame.lastHitEnviromentToSelf = t.environmentalType;
+		end;
+	end;
+	chatParseInfo.template  = {dstFlags = "dstFlags", [1] = "environmentalType"};
+	CombatParse_RegisterEvent(chatParseInfo);
 --#Region Death Messages
 	-- You Die
 	chatParseInfo.event    	= "UNIT_DIED";
 	chatParseInfo.func      = function(t)
-					if ( t.creepName ~= characterName ) then
-						return;
-					else
-				  		local killedBy = KILLLOG_LIST_UNKNOWNTYPE;
+					if ( t.creepName == characterName ) then
 				  		if ( KillLogFrame.lastHitOtherToSelf ) then
-							KillLogFrame_RecordData({ creepName = KillLogFrame.lastHitOtherToSelf }, "death", 1);
-							killedBy = KillLogFrame.lastHitOtherToSelf;
+							local killedBy = KillLogFrame.lastHitOtherToSelf;
+							KillLogFrame_RecordData({ creepName = killedBy }, "death", 1);
 							KillLogFrame_RecordDeath(killedBy);
 							KillLogFrame.lastHitOtherToSelf = nil;
+							KillLogFrame.lastHitEnviromentToSelf = nil;
+						elseif ( KillLogFrame.lastHitEnviromentToSelf ) then
+							KillLogFrame_RecordDeath(KillLogFrame.lastHitEnviromentToSelf, true);
+							KillLogFrame.lastHitEnviromentToSelf = nil;
 				  		end
 				  	end;
 				  end;
@@ -953,11 +963,15 @@ function KillLogFrame_RecordMiscXp(xpType, xp)
 	KillLog_SendUpdate();
 end
 
-function KillLogFrame_RecordDeath(creepName)
+function KillLogFrame_RecordDeath(creepName, isEnvironmental)
 	local KILLLOG_RECORD_NUMBERS = table.getn(KillLog_AllCharacterData["death"]) + 1;
 	if ( KillLog_Options.storeDeath and KillLog_AllCharacterData and KillLog_AllCharacterData["death"] ) then
 		KillLog_AllCharacterData.totalDeath = KILLLOG_RECORD_NUMBERS;
-		table.insert(KillLog_AllCharacterData["death"], { time = date(), level = UnitLevel("player"), creepName = creepName})
+		if isEnvironmental then
+			table.insert(KillLog_AllCharacterData["death"], { time = date(), level = UnitLevel("player"), creepName = creepName, environment = true })
+		else
+			table.insert(KillLog_AllCharacterData["death"], { time = date(), level = UnitLevel("player"), creepName = creepName})
+		end
 		KillLog_SendUpdate();
 	end
 end

@@ -139,11 +139,15 @@ function KillLog_GeneralFrame_OnShow()
     KillLog_GeneralFrameCreepTitle:Show();
 	
 	local totalKill, normalKill, rareKill, eliteKill, rareEliteKill, worldBossKill = 0, 0, 0, 0, 0, 0;
-	local totalDeath , tableDeath, normalDeath, rareDeath, eliteDeath, rareEliteDeath, worldBossDeath = 0, 0, 0, 0, 0, 0, 0;
+	local totalDeath , tableDeath, normalDeath, rareDeath, eliteDeath, rareEliteDeath, worldBossDeath, environmentDeath = 0, 0, 0, 0, 0, 0, 0, 0;
 
 	
 	tableDeath = table.getn(KillLog_AllCharacterData["death"])
-	
+	for _, data in pairs(KillLog_AllCharacterData["death"]) do
+		if data.environment then
+			environmentDeath = environmentDeath + 1;
+		end
+	end
 	for creepName, data in pairs(KillLog_AllCharacterData["overall"]) do
 		if ( data.kill ) then
 			if ( KillLog_CreepInfo and KillLog_CreepInfo[creepName] ) then
@@ -210,6 +214,7 @@ function KillLog_GeneralFrame_OnShow()
 	table.insert(creepList, { name = "    Elite Deaths", value = eliteDeath });
 	table.insert(creepList, { name = "    Rare Elite Deaths", value = rareEliteDeath });
 	table.insert(creepList, { name = "    WorldBoss Deaths", value = worldBossDeath });
+	table.insert(creepList, { name = "    Environment Deaths", value = environmentDeath });
 	
 	if ( totalKill == 0 and ( totalDeath == 0 or tableDeath == 0 ) ) then
 		table.insert(creepList, "placeholder");
