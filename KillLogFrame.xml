@@ -52,9 +52,6 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 			<OnEvent>
 				KillLogLoadingFrame_OnEvent(self,event,...);
 			</OnEvent>
-			<OnUpdate>
-				KillLogLoadingFrame_OnUpdate(self,elapsed);
-			</OnUpdate>
 		</Scripts>
 	</Frame>
 

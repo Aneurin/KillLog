@@ -114,34 +114,12 @@ function KillLogLoadingFrame_OnLoad(self)
 	end
 	
 	KillLogLoadingFrame:RegisterEvent("ADDON_LOADED");
-	KillLogLoadingFrame:RegisterEvent("PLAYER_ENTER_COMBAT");
-	KillLogLoadingFrame:RegisterEvent("PLAYER_LEAVE_COMBAT");
-	KillLogLoadingFrame:RegisterEvent("PLAYER_REGEN_DISABLED");
-	KillLogLoadingFrame:RegisterEvent("PLAYER_REGEN_ENABLED");
 end
 
 function KillLogLoadingFrame_OnEvent(self,event,...)
-	if ( event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_REGEN_DISABLED" ) then
-		KillLogLoadingFrame.combatEnded = nil;
-		DebugMessage("KL", event.." >>> combat", "helper");
-	elseif ( event == "PLAYER_LEAVE_COMBAT" or event == "PLAYER_REGEN_ENABLED" ) then
-		KillLogLoadingFrame.combatEnded = GetTime() + 5;
-		KillLogLoadingFrame:Show();
-		DebugMessage("KL", event.." <<< combat", "helper");
-	elseif ( event == "ADDON_LOADED" and ... == "KillLog" ) then
+	if ( event == "ADDON_LOADED" and ... == "KillLog" ) then
 		KillLogFrame_LoadData();
-		KillLogLoadingFrame:UnregisterEvent("ADDON_LOADED")
-	end
-end
-
-
-function KillLogLoadingFrame_OnUpdate(self,elapsed)
-	if ( KillLogLoadingFrame.combatEnded ) then
-		if ( KillLogLoadingFrame.combatEnded < GetTime() ) then
-			KillLogFrame.lastHitOtherToSelf = nil;
-			KillLogLoadingFrame.combatEnded = nil;
-		end
-	else
+		KillLogLoadingFrame:UnregisterEvent("ADDON_LOADED");
 		KillLogLoadingFrame:Hide();
 	end
 end
