@@ -103,27 +103,6 @@ function DebugMessage(x,y,z)
 	end
 end
 
-function KillLogLoadingFrame_OnLoad(self)
-	if ( Cosmos_RegisterButton ) then
-		Cosmos_RegisterButton(KILLLOG_BUTTON_TEXT, KILLLOG_BUTTON_SUBTEXT, KILLLOG_BUTTON_TIP, "Interface\\Icons\\Ability_Warrior_Sunder", ToggleKillLog);
-	end
-
-	-- Check if myAddOns is loaded
-	if(myAddOnsFrame_Register) then
-		DEFAULT_CHAT_FRAME:AddMessage(loadingTitle);
-	end
-	
-	KillLogLoadingFrame:RegisterEvent("ADDON_LOADED");
-end
-
-function KillLogLoadingFrame_OnEvent(self,event,...)
-	if ( event == "ADDON_LOADED" and ... == "KillLog" ) then
-		KillLogFrame_LoadData();
-		KillLogLoadingFrame:UnregisterEvent("ADDON_LOADED");
-		KillLogLoadingFrame:Hide();
-	end
-end
-
 
 function ToggleKillLog(tab)
 	if ( not KillLogFrame.loaded ) then
@@ -183,6 +162,17 @@ function KillLogTab_OnClick(self)
 end
 
 function KillLogFrame_OnLoad(self)
+	if ( Cosmos_RegisterButton ) then
+		Cosmos_RegisterButton(KILLLOG_BUTTON_TEXT, KILLLOG_BUTTON_SUBTEXT, KILLLOG_BUTTON_TIP, "Interface\\Icons\\Ability_Warrior_Sunder", ToggleKillLog);
+	end
+
+	-- Check if myAddOns is loaded
+	if(myAddOnsFrame_Register) then
+		DEFAULT_CHAT_FRAME:AddMessage(loadingTitle);
+	end
+
+	KillLogFrame:RegisterEvent("ADDON_LOADED");
+
 	SlashCmdList["KILL_LOG_TOGGLE"] = KillLogFrame_Slash;
 	SLASH_KILL_LOG_TOGGLE1 = "/killlog";
 	SLASH_KILL_LOG_TOGGLE2 = "/kl";
@@ -322,7 +312,7 @@ function KillLogFrame_Slash(msg)
 	end
 end	
 
-function KillLogFrame_OnEvent(event)
+function KillLogFrame_OnEvent(self,event,...)
 	if ( event == "MEMORY_EXHAUSTED" ) then
 		KillLog_FreeMemory();
 	elseif ( event == "PLAYER_TARGET_CHANGED" ) then
@@ -354,6 +344,9 @@ function KillLogFrame_OnEvent(event)
 				end
 			end
 		end
+	elseif ( event == "ADDON_LOADED" and ... == "KillLog" ) then
+		KillLogFrame_LoadData();
+		KillLogFrame:UnregisterEvent("ADDON_LOADED");
 	end
 end
 

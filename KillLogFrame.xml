@@ -43,18 +43,6 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 		</Anchors>
 	</Texture>
 
-	<!-- temporary, create frame to handle initialization; once complete, destroy frame -->
-	<Frame name="KillLogLoadingFrame">
-		<Scripts>
-			<OnLoad>
-				KillLogLoadingFrame_OnLoad(self);
-			</OnLoad>
-			<OnEvent>
-				KillLogLoadingFrame_OnEvent(self,event,...);
-			</OnEvent>
-		</Scripts>
-	</Frame>
-
 	<Frame name="KillLogFrame" toplevel="true" movable="true" parent="UIParent" hidden="true">
 		<Size>
 			<AbsDimension x="384" y="512"/>
@@ -218,7 +206,7 @@ Kill Log: A record of your exploits fighting creeps in Azeroth
 				KillLogFrame_OnLoad(self);
 			</OnLoad>
 			<OnEvent>
-				KillLogFrame_OnEvent(event);
+				KillLogFrame_OnEvent(self,event,...);
 			</OnEvent>
 			<OnShow>
 				KillLogFrame_OnShow();
