@@ -13,6 +13,11 @@ New
 Updates
 -------
 
++ Version 5.0.5
+  * Changes:-
+    Track deaths due to environmental damage (falling, fatigue, etc.).
+    Numerous code cleanups.
+
 + Version 5.0.4
   * Changes:-
     Update for WoW 5.0
