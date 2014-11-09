@@ -13,6 +13,11 @@ New
 Updates
 -------
 
++ Version 6.0.3
+  * Changes:-
+    Update for WoW 6.0
+    Allow storing up to 100 levels of monsters, to reflect WoD level cap.
+
 + Version 5.0.5
   * Changes:-
     Track deaths due to environmental damage (falling, fatigue, etc.).
