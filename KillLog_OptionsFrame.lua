@@ -28,7 +28,7 @@ local KillLog_OptionsFrameCheckButtons = {
 };
 
 local KillLog_OptionsFrameSliders = {
-	{ setting = "storeLevel",	valueStep = 1,	minValue = 1, maxValue = 90,							text = KILLLOG_OPTION_SLIDER_STORE_LEVEL,	tooltipText = KILLLOG_OPTION_SLIDER_TOOLTIP_STORE_LEVEL },
+	{ setting = "storeLevel",	valueStep = 1,	minValue = 1, maxValue = 100,							text = KILLLOG_OPTION_SLIDER_STORE_LEVEL,	tooltipText = KILLLOG_OPTION_SLIDER_TOOLTIP_STORE_LEVEL },
 	{ setting = "portrait",		valueStep = 10,	minValue = 1, maxValue = KILLLOG_LIST_MAX_PORTRAITS,	text = KILLLOG_OPTION_SLIDER_PORTRAIT,		tooltipText = KILLLOG_OPTION_SLIDER_TOOLTIP_PORTRAIT },
 	{ setting = "debugLevel",	valueStep = 1,	minValue = 1, maxValue = 5, 							text = KILLLOG_OPTION_SLIDER_DEBUG,			tooltipText = KILLLOG_OPTION_SLIDER_TOOLTIP_DEBUG },
 };
